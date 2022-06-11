@@ -1,0 +1,24 @@
+Condidate:-
+1. sign up with rollno and email
+2. verify with otp
+3. upload full details
+4. add a paragraph about himself
+5. registration fixing - approved by admin or moderator
+6. registration backout request - approved by admin only
+n. if he want to back out from the listing, he send a backout request to the admin.
+
+
+All user(students including candidates):-
+1. signup with rollno and email and a password
+2. verify with otp
+3. upload full details
+4. verfication of user by ID proof
+5. A TAB where he/she can requeset to be a CANDIDATE.
+6. Homepage where he/she can vote for their desired candidate.
+
+Admin page:-
+1. registered by the college authority.
+2. can do crud operation.
+3. approve the students when the time is up for voting.
+4. approve and unapproved the voting candidates.
+5. show the result of winner in a graph and show the no. of votes in datatable.
