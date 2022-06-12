@@ -22,3 +22,6 @@ Admin page:-
 3. approve the students when the time is up for voting.
 4. approve and unapproved the voting candidates.
 5. show the result of winner in a graph and show the no. of votes in datatable.
+
+
+"test": "echo \"Error: no test specified\" && exit 1"
