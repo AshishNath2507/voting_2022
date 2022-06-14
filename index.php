@@ -13,13 +13,13 @@
 
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="./library/css/bootstrap.min.css">
-    
-
 </head>
 
 <body>
     <?php include "nav.php"; ?>
-
+    <?php include "cal.php"; ?>
+    
+    <!-- Bootstrap links -->
     <script src="./library/js/bootstrap.bundle.min.js"></script>
 </body>
 
