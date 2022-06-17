@@ -1,5 +1,6 @@
 <?php
-
+    session_start();  
+    
 ?>
 
 <!DOCTYPE html>
@@ -20,50 +21,50 @@
             box-shadow: 20px 20px 60px #bebebe,
                 -20px -20px 60px #ffffff;
         } */
+        @font-face { font-family: anurati; src: url('../library/fonts/anurati/ANURATI/Anurati-Regular.otf'); } 
+        .anurati {
+            font-family: anurati;
+        }
     </style>
 </head>
 
 <body>
     <?php include "nav.php"; ?>
 
-    <!-- <div class="container-fluid mt-3 w-25">
-        <form action="../backend/login1.php" method="POST">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control border-0 border-bottom" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label ">Password</label>
-                <input type="password" class="form-control border-0 border-bottom" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div> -->
-
-    
     <div class="container-fluid  p-0">
         <!--Hey! This is the original version of Simple CSS Waves-->
 
         <div class="header">
-
             <!--Content before waves-->
             <div class="inner-header flex">
                 <!--Just the logo.. Don't mind this-->
                 <svg version="1.1" class="logo" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" xml:space="preserve">
                     <path fill="#FFFFFF" stroke="#000000" stroke-width="10" stroke-miterlimit="10" d="M57,283" />
                     <g>
-                        
-                        <div class="container-fluid mt-3 w-25">
-                            <form action="../backend/login1.php" method="POST">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label fs-5">Email address</label>
-                                    <input type="email" name="email" class="form-control border-0 border-bottom" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        <p class="text-center fs-1 m-5 text-light anurati">
+                            Student's Login Page
+                        </p>
+                        <div class="container-sm">
+                            <?php
+                            if (isset($_SESSION['alert_message'])) {
+                            ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Alert!!!</strong> <?php echo $_SESSION['alert_message']; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
-                                <div class="mb-3">
+                            <?php
+                                unset($_SESSION['alert_message']);
+                            }
+                            ?>
+                            <form action="../backend/login1.php" method="POST">
+                                <div class="mb-3 w-25 mx-auto">
+                                    <label for="exampleInputEmail1" class="form-label fs-5">Email address</label>
+                                    <input type="email" name="email" class="form-control border-0 border-bottom" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="@" required>
+                                    <div id="emailHelp" class="form-text text-info">We'll never share your email with anyone else.</div>
+                                </div>
+                                <div class="mb-3 w-25 mx-auto">
                                     <label for="exampleInputPassword1" class="form-label fs-5">Password</label>
-                                    <input type="password" name="password" class="form-control border-0 border-bottom" id="exampleInputPassword1">
+                                    <input type="password" name="password" class="form-control border-0 border-bottom" id="exampleInputPassword1" placeholder="********" required>
                                 </div>
                                 <button type="submit" name="loginSubmit" class="btn btn-secondary">Submit</button>
                             </form>

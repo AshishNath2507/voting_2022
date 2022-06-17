@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -19,47 +19,67 @@
         input:active {
             outline: none;
         }
+
+        @font-face {
+            font-family: anurati;
+            src: url('../library/fonts/anurati/ANURATI/Anurati-Regular.otf');
+        }
+
+        .anurati {
+            font-family: anurati;
+        }
     </style>
 </head>
 
 <body>
-    <?php include "./nav.php"; ?>
+    <?php include "nav.php"; ?>
 
     <div class="container-fluid">
         <p class="text-center mt-3 mb-5 fs-1">Register Here!!!</p>
         <div class="container-lg">
 
+            <?php
+            if (isset($_SESSION['alert_message'])) {
+            ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Hey!!!</strong> <?php echo $_SESSION['alert_message']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+                unset($_SESSION['alert_message']);
+            }
+            ?>
+
             <form class="w-50 mx-auto" action="../backend/register1.php" method="POST" enctype="multipart/form-data">
 
                 <div class="mb-3 d-flex">
                     <label for="name" class="form-label w-25">Name</label>
-                    <input type="text" class="form-control border-0 border-bottom outline-0" id="name" name="name" aria-describedby="nameHelp">
+                    <input type="text" class="form-control border-0 border-bottom outline-0" id="name" name="name" aria-describedby="nameHelp" autofocus required>
                 </div>
 
                 <div class="mb-3 d-flex">
                     <label for="rollno" class="form-label w-25">Roll No.</label>
-                    <input type="text" class="form-control" id="rollno" name="rollno" aria-describedby="rollHelp">
+                    <input type="text" class="form-control" id="rollno" name="rollno" aria-describedby="rollHelp" required>
                 </div>
 
                 <div class="mb-3 d-flex">
                     <label for="regno" class="form-label w-25">Registration No.</label>
-                    <input type="text" class="form-control" id="regno" name="regno" aria-describedby="regHelp">
+                    <input type="text" class="form-control" id="regno" name="regno" aria-describedby="regHelp" required>
                 </div>
 
                 <div class="mb-3 d-flex">
                     <label for="sob" class="form-label w-25">DoB</label>
-                    <input type="date" class="form-control w-50" id="sob" name="dob" aria-describedby="dobHelp">
+                    <input type="date" class="form-control w-50" id="sob" name="dob" aria-describedby="dobHelp" required>
                 </div>
 
                 <div class="mb-3 d-flex">
                     <label for="phone" class="form-label w-25">Phone No.</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" aria-describedby="telHelp">
+                    <input type="tel" class="form-control" id="phone" name="phone" aria-describedby="telHelp" required>
                 </div>
-
 
                 <div class="mb-3 d-flex">
                     <label for="addr" class="form-label w-25">Address</label>
-                    <input type="text" class="form-control" id="addr" name="addr" aria-describedby="addrHelp">
+                    <input type="text" class="form-control" id="addr" name="addr" aria-describedby="addrHelp" required>
                 </div>
 
                 <div class="mb-3 d-flex">
@@ -113,7 +133,7 @@
                 <div class="mb-3 mt-4 d-flex flex-column">
                     <div class="input-group">
                         <label class="input-group-text" for="inputGroupFile01">Upload Photo</label>
-                        <input type="file" class="form-control" name="photo" id="inputGroupFile01" aria-describedby="photoHelpBlock">
+                        <input type="file" class="form-control" name="photo" id="inputGroupFile01" aria-describedby="photoHelpBlock" accept="image/*" required>
                     </div>
                     <div id="photoHelpBlock" class="form-text">
                         Upload your photo in size >= 2MB file(jpg, jpeg, png)
@@ -123,7 +143,7 @@
                 <div class="mb-4 mt-4 d-flex flex-column">
                     <div class="input-group">
                         <label class="input-group-text" for="idproof">Upload ID Proof</label>
-                        <input type="file" class="form-control" name="idproof" id="idproof" aria-describedby="idproofHelpBlock">
+                        <input type="file" class="form-control" name="idproof" id="idproof" aria-describedby="idproofHelpBlock" accept="image/*" required>
                     </div>
                     <div id="idproofHelpBlock" class="form-text">
                         Upload aadhar card and college ID card (both sides in a single file)
@@ -136,7 +156,7 @@
                 <div class="mb-3 mt-4 d-flex flex-column">
                     <div class="input-group">
                         <label for="email" class="form-label w-25">Email address</label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
                     </div>
                     <div id="emailHelp" class="form-text">
                         <p>
@@ -150,7 +170,7 @@
                 <div class="mb-3 d-flex flex-column">
                     <div class="input-group">
                         <label for="inputPassword5" class="form-label w-25">Password</label>
-                        <input type="password" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                        <input type="password" name="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" required>
                     </div>
                     <div id="passwordHelpBlock" class="form-text">
                         <p>

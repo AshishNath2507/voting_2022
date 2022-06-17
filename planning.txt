@@ -25,3 +25,17 @@ Admin page:-
 
 
 "test": "echo \"Error: no test specified\" && exit 1"
+
+// Links 
+<!-- Bootstrap links -->
+    <link rel="stylesheet" href="../library/css/bootstrap.min.css">
+<!-- Bootstrap script -->
+    <script src="../library/js/bootstrap.bundle.min.js"></script>
+
+<!-- Anurati font -->
+<style>
+    @font-face { font-family: anurati; src: url('./library/fonts/anurati/ANURATI/Anurati-Regular.otf'); } 
+    .anurati {
+        font-family: anurati;
+    }
+</style>

@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #337171">
     <div class="container-lg d-flex ">
-        <a class="navbar-brand p-3 me-5 flex-grow-3" href="../index.php">Navbar</a>
+        <a class="navbar-brand p-3 me-5 flex-grow-3 anurati" href="../index.php">ONLINE VOTING SYSTEM</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,6 +41,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="./register.php">Register</a></li>
                         <li><a class="dropdown-item" href="./login.php">Signin</a></li>
+                        <li><a class="dropdown-item" href="./candidate/c_login.php">Login as candidate</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
