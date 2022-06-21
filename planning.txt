@@ -39,3 +39,5 @@ Admin page:-
         font-family: anurati;
     }
 </style>
+
+<button type="button" class="btn btn-info rounded-circle edit editbtn m-1" data-toggle="modal" value="<?php echo $row["id"]; ?>"></button>

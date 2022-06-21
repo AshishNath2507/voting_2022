@@ -37,7 +37,7 @@ if (isset($_POST['candRegister'])) {
 
                 // $mail->setFrom('email account', 'OTP Verification');
                 $mail->setFrom('ashishnath.sendemail@gmail.com', 'OTP Verification');
-                $mail->addAddress($_POST["email"]);
+                $mail->addAddress($email);
 
                 $name = $_SESSION['username'];
 

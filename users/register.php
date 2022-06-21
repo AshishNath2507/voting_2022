@@ -54,7 +54,7 @@ session_start();
 
                 <div class="mb-3 d-flex">
                     <label for="name" class="form-label w-25">Name</label>
-                    <input type="text" class="form-control border-0 border-bottom outline-0" id="name" name="name" aria-describedby="nameHelp" autofocus required>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" autofocus required>
                 </div>
 
                 <div class="mb-3 d-flex">
@@ -156,7 +156,13 @@ session_start();
                 <div class="mb-3 mt-4 d-flex flex-column">
                     <div class="input-group">
                         <label for="email" class="form-label w-25">Email address</label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                        <!-- <div class="col"> -->
+                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                        <!-- </div> -->
+                        <!-- <div class="col">
+                            <a class="btn btn-primary" onclick="checkOTP()">send OTP</a>
+
+                        </div> -->
                     </div>
                     <div id="emailHelp" class="form-text">
                         <p>
@@ -165,6 +171,18 @@ session_start();
                         </p>
                     </div>
                 </div>
+
+                <!-- <div class="mb-3 mt-4 d-flex flex-column" id='otpDiv' style="display: none !important;">
+                    <div class="input-group">
+                        <label for="OTP" class="form-label w-25">Enter OTP</label>
+                        <input type="number" name="OTP" class="form-control" id="OTP" aria-describedby="OTPhelp" required>
+                    </div>
+                    <div id="OTPhelp" class="form-text">
+                        <p>
+                            Enter OTP
+                        </p>
+                    </div>
+                </div> -->
 
 
                 <div class="mb-3 d-flex flex-column">
@@ -201,6 +219,10 @@ session_start();
         //     icon: "success",
         //     button: "Aww yiss!",
         // });
+        // function checkOTP()
+        // {
+        //     document.getElementById('otpDiv').style.display='';
+        // }
     </script>
 
 </body>

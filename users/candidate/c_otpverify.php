@@ -78,7 +78,7 @@ if (isset($_POST["verify"])) {
     ?>
         <script>
             alert("Verfiy account done, you may sign in now");
-            // window.location.replace("./login.php");
+            window.location.replace("../userhomepage.php");
         </script>
 <?php
     }

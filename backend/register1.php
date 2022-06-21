@@ -64,16 +64,15 @@ if (isset($_POST['regSubmit'])) {
                 else {
                     $filenamenew = uniqid('', true) . "." . $fileActualEXt;
                     $photo1 = '../uploads/' . $filenamenew;
-                    move_uploaded_file($filetemp, $photo1);
+                    move_uploaded_file($filetemp, $photo1);//(filename, destination)
 
                     $filenamenew1 = uniqid('', true) . "." . $fileActualEXt1;
                     $photo2 = '../uploads/' . $filenamenew1;
                     move_uploaded_file($filetemp1, $photo2);
 
-                    $result = "INSERT INTO users VALUES (null, '$name', '$rollno' , '$regno', '$dob', '$phone', '$addr', '$gender', '$email', '$password_hash', '$photo1', '$photo2', '$branch', '$sem', null, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, CURRENT_TIMESTAMP)";
+                    $result = "INSERT INTO users VALUES (null, '$name', '$rollno' , '$regno', '$dob', '$phone', '$addr', '$gender', '$email', '$password_hash', '$photo1', '$photo2', '$branch', '$sem', null, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, CURRENT_TIMESTAMP)";
 
                     if (mysqli_query($con, $result)) {
-
                         
                         $otp = rand(1000, 9999);
                         $_SESSION['otp'] = $otp;
@@ -120,7 +119,7 @@ if (isset($_POST['regSubmit'])) {
                             $userID = mysqli_insert_id($con);
                             $newSql = "INSERT INTO roles VALUES (null, $userID, DEFAULT)";
                             mysqli_query($con, $newSql);
-                            header("Location: ../users/userhomepage.php?data=updated");
+                            header("Location: ../users/otpverify.php?data=updated");
                         }
                     }
                 }

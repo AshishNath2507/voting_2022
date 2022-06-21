@@ -41,7 +41,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="./register.php">Register</a></li>
                         <li><a class="dropdown-item" href="./login.php">Signin</a></li>
-                        <li><a class="dropdown-item" href="./candidate/c_login.php">Login as candidate</a></li>
+                        <li><a class="dropdown-item" href="../can_login.php">Login as candidate</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
