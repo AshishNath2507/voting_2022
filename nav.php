@@ -44,7 +44,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Result</a></li>
+                        <li><a class="dropdown-item" href="./result.php">Result</a></li>
                     </ul>
                 </li>
                 <!-- <li class="nav-item">

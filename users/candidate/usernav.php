@@ -1,8 +1,8 @@
 
-<nav class="navbar bg-light">
+<nav class="navbar" style="background: linear-gradient(60deg, #337171 0%, #4b7005 100%);">
     <div class="container-fluid">
-        <a class="navbar-brand mx-auto anurati" href="../userhomepage.php">VOTE</a>
-        <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <a class="navbar-brand mx-auto anurati text-light" href="../userhomepage.php">VOTE</a>
+        <button class="navbar-toggler mx-auto bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">

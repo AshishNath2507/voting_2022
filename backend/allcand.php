@@ -40,4 +40,23 @@
             header("Location: ../admin/candidate/candidate.php?user+not+deleted");
         }
     };
-?>
+
+    // Student approve
+    if (isset($_POST['stuApprButton'])) {
+        
+        $userid = $_POST['sappr_id'];
+        $query = mysqli_query($con, "SELECT * FROM users WHERE id = $userid");
+        $row = mysqli_fetch_array($query);
+
+        if ($row['status'] == "approved") {
+            $_SESSION['alert_message'] = "User is already approved";
+            header("Location: ../admin/candidate/candidate.php?user=already+approved");
+        } else if ($row['status'] == "pending") {
+            $result = mysqli_query($con, "UPDATE `users` SET `status` = 'approved' WHERE `users`.`id` = $userid");
+            $_SESSION['alert_message'] = "User verified successfully";
+            header("Location: ../admin/candidate/candidate.php?user=approved");
+        } else {
+            $_SESSION['alert_message'] = "User Approval Failed";
+            header("Location: ../admin/candidate/candidate.php?user=not+approved");
+        }    
+    };

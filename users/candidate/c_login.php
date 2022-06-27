@@ -2,6 +2,11 @@
 
 session_start();
 
+if (!isset($_SESSION['username'])) {
+    $_SESSION['alert_message'] = "You are Logged Out";
+    header("Location: login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +35,7 @@ session_start();
 <body>
     <?php include "./usernav.php"; ?>
 
-    
+
     <div class="container-fluid  p-0">
         <!--Hey! This is the original version of Simple CSS Waves-->
 

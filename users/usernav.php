@@ -2,7 +2,7 @@
 <nav class="navbar bg-light">
     <!-- above class had fixed-top -->
     <div class="container-fluid">
-        <a class="navbar-brand mx-auto anurati" href="#">VOTE</a>
+        <a class="navbar-brand mx-auto anurati" href="./userhomepage.php">VOTE</a>
         <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,7 +14,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="./userhomepage.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./candidatesview.php">Candidates</a>
@@ -28,6 +28,10 @@
                             <li><a class="dropdown-item" href="#">Another action</a></li>
 
                         </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="./vote.php">Vote Now</a>
                     </li>
 
                     <li class="nav-item dropdown ">

@@ -70,7 +70,7 @@ if (isset($_POST['regSubmit'])) {
                     $photo2 = '../uploads/' . $filenamenew1;
                     move_uploaded_file($filetemp1, $photo2);
 
-                    $result = "INSERT INTO users VALUES (null, '$name', '$rollno' , '$regno', '$dob', '$phone', '$addr', '$gender', '$email', '$password_hash', '$photo1', '$photo2', '$branch', '$sem', null, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, CURRENT_TIMESTAMP)";
+                    $result = "INSERT INTO users VALUES (null, '$name', '$rollno' , '$regno', '$dob', '$phone', '$addr', '$gender', '$email', '$password_hash', '$photo1', '$photo2', '$branch', '$sem', null, DEFAULT, DEFAULT, DEFAULT, null, DEFAULT, DEFAULT, DEFAULT, CURRENT_TIMESTAMP)";
 
                     if (mysqli_query($con, $result)) {
                         

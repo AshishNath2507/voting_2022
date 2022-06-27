@@ -1,0 +1,13 @@
+<td> <?php echo $row["rollno"] ?></td>
+<td> <?php echo $row["regno"] ?> </td>
+ <td> <?php echo $row["role"]  ?> </td>
+<td title="<?php echo $row["phone"] ?>"> <?php echo $row["phone"] ?> </td>
+<td title="<?php echo $row["addr"] ?>"> <?php echo $row["addr"] ?> </td>
+<td> <?php echo $row["gender"] ?> </td>
+
+<td> <?php echo $row["pass"] ?> </td>
+
+<td> <?php echo $row["branch"] ?> </td>
+<td> <?php echo $row["sem"] ?> </td>
+
+<td> <?php echo $row["created"] ?> </td>

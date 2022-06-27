@@ -36,7 +36,9 @@ if (!isset($_SESSION['admin'])) {
 
     <link rel="stylesheet" href="../../library/fontawesome-free-6.1.1-web/css/v5-font-face.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../../library/jquery.min.js"></script>
+
     <style>
         td {
             max-width: 150px;
@@ -54,6 +56,19 @@ if (!isset($_SESSION['admin'])) {
 
         tr:nth-child(even) {
             background-color: rgb(236, 234, 234);
+        }
+
+        thead {
+            background-color: #024a74;
+            color: white;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: center;
+            font-size: .8rem;
         }
 
         .actions {
@@ -431,23 +446,23 @@ if (!isset($_SESSION['admin'])) {
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered compact display" id="dataTable" cellspacing="0">
+                                <table class="table table-bordered compact display rounded" id="dataTable" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Photo</th>
-                                            <th>Role</th>
+                                            <!-- <th>Role</th> -->
                                             <th>Name</th>
-                                            <th>Rollno</th>
-                                            <th>Regno</th>
-                                            <th>DOB</th>
-                                            <th>Phone</th>
+                                            <!-- <th>Rollno</th>
+                                            <th>Regno</th>-->
+                                            <!--<th>Phone</th>
                                             <th>Address</th>
-                                            <th>Gender</th>
+                                            <th>Gender</th> -->
                                             <th>Email</th>
-                                            <th>Password</th>
+                                            <th>DOB</th>
+                                            <!-- <th>Password</th> -->
                                             <th>Id-proof</th>
-                                            <th>Branch</th>
-                                            <th>Semester</th>
+                                            <!-- <th>Branch</th>
+                                            <th>Semester</th> -->
                                             <th>Insignia</th>
                                             <th>Email-status</th>
                                             <th>Candidate-email-status</th>
@@ -455,7 +470,7 @@ if (!isset($_SESSION['admin'])) {
                                             <th>Vote-status</th>
                                             <th>Status</th>
                                             <th>isDelete</th>
-                                            <th>Created</th>
+                                            <!-- <th>Created</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -487,35 +502,27 @@ if (!isset($_SESSION['admin'])) {
                                     <tbody>
                                         <?php
                                         require "../../connect.php";
-                                        $result = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate'");
+                                        $result = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate' ORDER BY u.id DESC");
                                         while ($row = mysqli_fetch_array($result)) {
                                         ?>
                                             <tr>
                                                 <td><img class="img-profile rounded" src="<?php echo '../' . $row["photo"]; ?>" alt="image" style="width:50px;"></td>
-                                                <td> <?php echo $row["role"]  ?> </td>
                                                 <td> <?php echo $row["name"]  ?> </td>
-                                                <td> <?php echo $row["rollno"] ?></td>
-                                                <td> <?php echo $row["regno"] ?> </td>
-                                                <td> <?php echo $row["dob"] ?> </td>
-                                                <td title="<?php echo $row["phone"] ?>"> <?php echo $row["phone"] ?> </td>
-                                                <td title="<?php echo $row["addr"] ?>"> <?php echo $row["addr"] ?> </td>
-                                                <td> <?php echo $row["gender"] ?> </td>
                                                 <td title="<?php echo $row["email"] ?>"> <?php echo $row["email"] ?> </td>
-                                                <td> <?php echo $row["pass"] ?> </td>
+                                                <td> <?php echo $row["dob"] ?> </td>
                                                 <td><img src="<?php echo '../' . $row["id_proof"]; ?>" alt="image" style="width:50px;"></td>
-                                                <td> <?php echo $row["branch"] ?> </td>
-                                                <td> <?php echo $row["sem"] ?> </td>
-                                                <td> <?php echo $row["insignia"] ?> </td>
-                                                
+                                                <td><img src="<?php echo '../' . $row["insignia"]; ?>" alt="image" style="width:50px;"></td>
+
+
                                                 <!--  -->
                                                 <?php
                                                 if ($row['email_status'] == "verified") {
                                                 ?>
-                                                    <td> <button class="btn btn-success bg-transparent text-success disabled"><?php echo $row["email_status"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm bg-transparent text-success disabled"><?php echo $row["email_status"] ?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td> <button class="btn btn-secondary bg-transparent text-secondary disabled"><?php echo $row["email_status"] ?></button> </td>
+                                                    <td> <button class="btn btn-secondary btn-sm bg-transparent text-secondary disabled"><?php echo $row["email_status"] ?></button> </td>
                                                 <?php
                                                 }
                                                 ?>
@@ -523,26 +530,25 @@ if (!isset($_SESSION['admin'])) {
                                                 <?php
                                                 if ($row['cand_email_verify'] == "verified") {
                                                 ?>
-                                                    <td> <button class="btn btn-success bg-transparent text-success disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm bg-transparent text-success disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td> <button class="btn btn-secondary bg-transparent text-secondary disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
+                                                    <td> <button class="btn btn-secondary btn-sm bg-transparent text-secondary disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
                                                 <?php
                                                 }
                                                 ?>
                                                 <!--  -->
-                                                
                                                 <?php
                                                 if ($row['cand_approval'] == "approved") {
                                                 ?>
-                                                    <td> <button class="btn btn-success"><?php echo $row["cand_approval"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm"><?php echo $row["cand_approval"] ?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td><button class="btn btn-danger apprbtn" name="submit" value="<?php echo $row["id"]; ?>">
-                                                        <span class=""><?php echo $row["cand_approval"] ?></span>
-                                                    </button></td>
+                                                    <td><button class="btn btn-danger btn-sm apprbtn" name="submit" value="<?php echo $row["id"]; ?>">
+                                                            <span class=""><?php echo $row["cand_approval"] ?></span>
+                                                        </button></td>
                                                 <?php
                                                 }
                                                 ?>
@@ -550,11 +556,11 @@ if (!isset($_SESSION['admin'])) {
                                                 <?php
                                                 if ($row['voted'] == "voted") {
                                                 ?>
-                                                    <td> <button class="btn btn-success fs-5 bg-transparent text-success disabled"><?php echo $row["voted"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm  bg-transparent text-success disabled"><?php echo $row["voted"] ?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td> <button class="btn btn-secondary bg-transparent text-secondary disabled"><?php echo $row["voted"] ?></button> </td>
+                                                    <td> <button class="btn btn-secondary btn-sm bg-transparent text-secondary disabled"><?php echo $row["voted"] ?></button> </td>
                                                 <?php
                                                 }
                                                 ?>
@@ -562,13 +568,13 @@ if (!isset($_SESSION['admin'])) {
                                                 <?php
                                                 if ($row['status'] == "approved") {
                                                 ?>
-                                                    <td> <button class="btn btn-success"><?php echo $row["status"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm"><?php echo $row["status"] ?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td><button class="btn btn-danger " name="submit" value="<?php echo $row["id"]; ?>">
-                                                        <span class=""><?php echo $row["status"] ?></span>
-                                                    </button></td>
+                                                    <td><button class="btn btn-danger btn-sm sapprbtn" name="submit" value="<?php echo $row["id"]; ?>">
+                                                            <span class=""><?php echo $row["status"] ?></span>
+                                                        </button></td>
                                                 <?php
                                                 }
                                                 ?>
@@ -576,17 +582,16 @@ if (!isset($_SESSION['admin'])) {
                                                 <?php
                                                 if ($row['isdel'] == "1") {
                                                 ?>
-                                                    <td> <button class="btn btn-danger"><?php echo $row["isdel"] ?></button> </td>
+                                                    <td> <button class="btn btn-danger btn-sm"><?php echo $row["isdel"] ?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td> <button class="btn btn-success"><?php echo $row["isdel"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm"><?php echo $row["isdel"] ?></button> </td>
                                                 <?php
                                                 }
                                                 ?>
-                                                <td> <?php echo $row["created"] ?> </td>
                                                 <td class="actions">
-                                                    
+
                                                     <button type="button" class="btn btn-danger rounded-circle delete deletebtn m-1" value="<?php echo $row["id"]; ?>"></button>
                                                 </td>
 
@@ -598,7 +603,32 @@ if (!isset($_SESSION['admin'])) {
                                 </table>
                             </div>
                         </div>
-                        <!-- Approval Modal HTML -->
+                        <!-- All Students Approval Modal HTML -->
+                        <div id="sapprModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="../../backend/allcand.php" method="POST">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Approved Record</h4>
+                                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input type="text" name="sappr_id" class="sappr_user_id outline-0 text-danger" readonly>
+
+                                            <p>Are you sure you want to approve this Record?</p>
+                                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                            <input type="submit" name="stuApprButton" class="btn btn-primary" value="Approve">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- All Students Approval Modal HTML -->
+
+                        <!-- Candidate Approval Modal HTML -->
                         <div id="apprModal" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -608,7 +638,7 @@ if (!isset($_SESSION['admin'])) {
                                             <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
                                         </div>
                                         <div class="modal-body">
-                                            <input type="text" name="appr_id" class="appr_user_id border-0 outline-0 text-danger" readonly>
+                                            <input type="text" name="appr_id" class="appr_user_id outline-0 text-danger" readonly>
 
                                             <p>Are you sure you want to approve this Record?</p>
                                             <p class="text-warning"><small>This action cannot be undone.</small></p>
@@ -694,7 +724,7 @@ if (!isset($_SESSION['admin'])) {
         </div>
     </div>
     <script>
-        //Approval modal function
+        //Candidate Approval modal function
         $(document).ready(function() {
             $('.apprbtn').click(function(e) {
                 e.preventDefault();
@@ -702,6 +732,17 @@ if (!isset($_SESSION['admin'])) {
                 var user_id = $(this).val();
                 $('.appr_user_id').val(user_id);
                 $('#apprModal').modal('show');
+            });
+        });
+
+        //All students status approve function
+        $(document).ready(function() {
+            $('.sapprbtn').click(function(e) {
+                e.preventDefault();
+                // if the button has any value, it will be stored in "user_id"
+                var user_id = $(this).val();
+                $('.sappr_user_id').val(user_id);
+                $('#sapprModal').modal('show');
             });
         });
 

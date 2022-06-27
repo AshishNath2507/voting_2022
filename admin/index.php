@@ -107,6 +107,13 @@
                 Addons
             </div>
 
+            <!-- Nav Item - Add Posts -->
+            <li class="nav-item">
+                <a class="nav-link" href="./addposts.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Add Posts</span></a>
+            </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -128,6 +135,7 @@
                 </div>
             </li>
 
+            
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
