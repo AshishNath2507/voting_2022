@@ -19,6 +19,15 @@ require "../connect.php";
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="../library/css/bootstrap.min.css">
 
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="../plugins/iCheck/all.css">
+
+    <link rel="stylesheet" href="../library/fontawesome-free-6.1.1-web/css/all.css">
+    <link rel="stylesheet" href="../library/fontawesome-free-6.1.1-web/css/brands.css">
+    <link rel="stylesheet" href="../library/fontawesome-free-6.1.1-web/css/solid.css">
+
+    <link rel="stylesheet" href="../library/fontawesome-free-6.1.1-web/css/v5-font-face.css">
+
     <!-- Anurati font -->
     <style>
         @font-face {
@@ -32,125 +41,225 @@ require "../connect.php";
 
         input[type=radio] {
             border: 2px solid red;
-            width: 2rem;
-            height: 2em;
+            width: 1rem;
+            height: 1rem;
             box-sizing: border-box;
             margin-right: 3rem;
         }
+
+        #candidate_list ul {
+            list-style-type: none;
+        }
+
+        /*    
+        .mt20 {
+            margin-top: 20px;
+        }
+
+        .title {
+            font-size: 50px;
+        }
+
+        #candidate_list {
+            margin-top: 20px;
+        }
+
+
+        #candidate_list ul li {
+            margin: 0 30px 30px 0;
+            vertical-align: top
+        }
+
+        .clist {
+            margin-left: 20px;
+        }
+
+        .cname {
+            font-size: 25px;
+        }
+
+        .votelist {
+            font-size: 17px;
+        } */
     </style>
 </head>
 
 <body>
+
     <?php include "usernav.php"; ?>
 
-    <?php
-    if (isset($_SESSION['alert_message'])) {
-    ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Alert!!!</strong> <?php echo $_SESSION['alert_message']; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php
-        unset($_SESSION['alert_message']);
-    }
-    ?>
     <div class="container-fluid">
-        <?php
+        <div class="container">
 
-        $per_page = 1;
-        $start = 0;
-        $current_page = 1;
-        if (isset($_GET['start'])) {
-            $start = $_GET['start'];
-            if ($start <= 0) {
-                $start = 0;
-                $current_page = 1;
-            } else {
-                $current_page = $start;
-                $start--;
-                $start = $start * $per_page;
-            }
-        }
+            <!-- Main content -->
+            <section class="content">
 
-        $record = mysqli_num_rows(mysqli_query($con, "SELECT * FROM posts"));
-        $pagi = ceil($record / $per_page);
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <?php
+                        if (isset($_SESSION['alert_message'])) {
+                        ?>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Hey!!!</strong> <?php echo $_SESSION['alert_message']; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php
+                            unset($_SESSION['alert_message']);
+                        }
+                        ?>
 
-        // if($start > $pagi)
 
-        $sql = "SELECT * FROM posts limit $start, $per_page";
-        $post_query = mysqli_query($con, $sql);
-
-        if (mysqli_num_rows($post_query) > 0) {
-            while ($row =  mysqli_fetch_array($post_query)) {
-                $pname = $row['p_name'];
-        ?>
-                <form action="" method="POST">
-                    <div class="container d-grid">
-                        <div class="row gap">
-                            <p class="fs-5 text-dark border-bottom border-info">Vote for the post of <?php echo $row['p_name']; ?><br></p>
+                        <!-- Voting Ballot -->
+                        <form method="POST" id="ballotForm" action="../backend/submit_ballot.php">
                             <?php
-                            $cand_query = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON ( u.id = r.user_id ) WHERE r.role = 'candidate' AND u.cand_post = '$pname'");
+                            include './slugify.php';
+                            
+                            $candidate = '';
+                            $sql = "SELECT * FROM posts ORDER BY p_id ASC";
+                            $query = $con->query($sql);
+                            while ($row = $query->fetch_assoc()) {
+                                $pname = $row['p_name'];
+                                // $sql = "SELECT * FROM candidates WHERE position_id='" . $row['id'] . "'";
+                                $sqli = "SELECT * FROM users AS u INNER JOIN roles AS r ON ( u.id = r.user_id ) WHERE r.role = 'candidate' AND u.cand_post = '$pname'";
+                                $cquery = $con->query($sqli);
+                                while ($crow = $cquery->fetch_assoc()) {
+                                    $slug = slugify($row['p_name']);
+                                    $checked = '';
+                                    if (isset($_SESSION['post'][$slug])) {
+                                        $value = $_SESSION['post'][$slug];
 
-                            while ($war = mysqli_fetch_array($cand_query)) {
-                                if ($pname != $war['cand_post']) {
-                                    echo "<p>No Records</p>";
-                                } else {
-                                ?>
-                                    <div class="form-check border w-50">
-                                        <input class="form-check-input" type="radio" name="vote" id="<?php echo $row['p_id']; ?>" value="<?php echo $war['user_id']; ?>" required>
-                                        <label class="form-check-label" for="<?php echo $row['p_id']; ?>">
-                                            <?php echo $war['name']; ?>
-                                        </label>
-                                        <img src="<?php echo  $war['photo']; ?>" alt="img" style="width: 10%;">
-                                        <br>
-                                        <br>
-                                    </div>
-                                <?php
+
+                                        if (is_array($value)) {
+                                            foreach ($value as $val) {
+                                                if ($val == $crow['id']) {
+                                                    $checked = 'checked';
+                                                }
+                                            }
+                                        } else {
+                                            if ($value == $crow['id']) {
+                                                $checked = 'checked';
+                                            }
+                                        }
+                                    }
+                                    $input = '<input type="radio" class="flat-red ' . $slug . '"name="' . slugify($row['p_name']) . '" value="' . $crow['user_id'] . '" ' . $checked . '>';
+                                    $image = (!empty($crow['photo'])) ? '../uploads/' . $crow['photo'] : '../photos/profile.jpg';
+                                    $insignia = (!empty($crow['insignia'])) ? '../uploads/' . $crow['insignia'] : '../photos/profile.jpg';
+                                    $candidate .= '
+                                            
+                                            ' . $input . '<span class="cname clist">' . $crow['name'] . '</span><img src="' . $image . '" height="100px" width="100px" class="clist"> <img src="' . $insignia . '" height="100px" width="100px" class="clist">
+                                            
+										';
                                 }
-                                ?>
-                            <?php
-                            };
+                                $instruct = '<p class="fs-5">Select any one candidate</p>';
                             ?>
 
-                        </div>
-                    </div>
-                    <button class="btn btn-primary mx-5 mt-4" type="submit" name="voteSubmit">Confirm</button>
-                </form>
+                                <div class="card border mb-3" style="width: auto;">
+                                    <div class="card-header bg-transparent border ">
+                                        <?php echo $row['p_name']; ?>
+                                        <p><?php echo $instruct; ?>
+                                            <span class="pull-right">
+                                                <button type="reset" class="btn btn-info btn-sm btn-flat reset" data-desc="<?php slugify($row['p_name']); ?>"><i class="fa fa-refresh"></i> Reset</button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="card-body text-success">
+                                        <div id="candidate_list">
+                                            <ul>
+                                                <li><?php echo $candidate; ?></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
 
-            <?php
-            };
-        } else {
-            ?>
-            <p>No Records</p>
-        <?php
-        }
-        ?>
+                            <?php
+
+                                $candidate = '';
+                            }
+
+                            ?>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
+                                <button type="submit" class="btn btn-primary btn-flat" name="vote"><i class="fa fa-check"></i> Submit</button>
+                            </div>
+                        </form>
+                        <!-- End Voting Ballot -->
+
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </div>
-    <div class="container m-5">
-        <nav class="" aria-label="...">
-            <ul class="pagination">
-                <?php
-                for ($i = 1; $i <= $pagi; $i++) {
-                    $class = '';
-                    if ($current_page == $i) {
-                        ?>
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?php echo $i ?></a></li>
-                        <?php
-                    }else{
-                        ?>
-                            <li class="page-item <?php echo $class; ?>"><a class="page-link" href="?start=<?php echo $i; ?>"><?php echo $i ?></a></li>
-                        <?php
-                    }
-                ?>
-                    
-                <?php
-                }
-                ?>
-            </ul>
-        </nav>
-    </div>
+
+    <?php
+    //  include 'includes/footer.php';
+    ?>
+    <?php
+    // include 'includes/ballot_modal.php'; 
+    ?>
     <!-- Bootstrap script -->
     <script src="../library/js/bootstrap.bundle.min.js"></script>
+
+    <?php
+    // include 'includes/scripts.php'; 
+    ?>
+    <script src="../library/jquery.min.js"></script>
+    <script>
+        $(function() {
+            // $('.content').iCheck({
+            //     checkboxClass: 'icheckbox_flat-green',
+            //     radioClass: 'iradio_flat-green'
+            // });
+
+            // $(document).on('click', '.reset', function(e) {
+            //     e.preventDefault();
+            //     var desc = $(this).data('desc');
+            //     $('.' + desc).iCheck('uncheck');
+            // });
+
+            // $(document).on('click', '.platform', function(e) {
+            //     e.preventDefault();
+            //     $('#platform').modal('show');
+            //     var platform = $(this).data('platform');
+            //     var fullname = $(this).data('fullname');
+            //     $('.candidate').html(fullname);
+            //     $('#plat_view').html(platform);
+            // });
+
+            // $('#preview').click(function(e) {
+            //     e.preventDefault();
+            //     var form = $('#ballotForm').serialize();
+            //     if (form == '') {
+            //         $('.message').html('You must vote atleast one candidate');
+            //         $('#alert').show();
+            //     } else {
+            //         $.ajax({
+            //             type: 'POST',
+            //             url: 'preview.php',
+            //             data: form,
+            //             dataType: 'json',
+            //             success: function(response) {
+            //                 if (response.error) {
+            //                     var errmsg = '';
+            //                     var messages = response.message;
+            //                     for (i in messages) {
+            //                         errmsg += messages[i];
+            //                     }
+            //                     $('.message').html(errmsg);
+            //                     $('#alert').show();
+            //                 } else {
+            //                     $('#preview_modal').modal('show');
+            //                     $('#preview_body').html(response.list);
+            //                 }
+            //             }
+            //         });
+            //     }
+
+            //});
+
+        });
+    </script>
 </body>
 
 </html>
