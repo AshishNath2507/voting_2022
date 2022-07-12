@@ -59,7 +59,7 @@
                             <form action="../backend/adminLogin1.php" method="POST">
                                 <div class="mb-3 w-25 mx-auto">
                                     <label for="exampleInputEmail1" class="form-label fs-5">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="@" required>
+                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="@" required autofocus>
                                 </div>
                                 <div class="mb-3 w-25 mx-auto">
                                     <label for="password" class="form-label fs-5">Password</label>

@@ -50,37 +50,6 @@ require "../connect.php";
         #candidate_list ul {
             list-style-type: none;
         }
-
-        /*    
-        .mt20 {
-            margin-top: 20px;
-        }
-
-        .title {
-            font-size: 50px;
-        }
-
-        #candidate_list {
-            margin-top: 20px;
-        }
-
-
-        #candidate_list ul li {
-            margin: 0 30px 30px 0;
-            vertical-align: top
-        }
-
-        .clist {
-            margin-left: 20px;
-        }
-
-        .cname {
-            font-size: 25px;
-        }
-
-        .votelist {
-            font-size: 17px;
-        } */
     </style>
 </head>
 
@@ -158,7 +127,11 @@ require "../connect.php";
                                         <?php echo $row['p_name']; ?>
                                         <p><?php echo $instruct; ?>
                                             <span class="pull-right">
-                                                <button type="reset" class="btn btn-info btn-sm btn-flat reset" data-desc="<?php slugify($row['p_name']); ?>"><i class="fa fa-refresh"></i> Reset</button>
+                                                <button type="reset" class="btn btn-info btn-sm btn-flat reset" data-desc="
+                                                <?php 
+                                                slugify($row['p_name']); 
+                                                ?>
+                                                "><i class="fa fa-refresh"></i> Reset</button>
                                             </span>
                                         </p>
                                     </div>
@@ -178,7 +151,7 @@ require "../connect.php";
 
                             ?>
                             <div class="text-center">
-                                <button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
+                                <!-- <button type="button" type="reset" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Reset</button> -->
                                 <button type="submit" class="btn btn-primary btn-flat" name="vote"><i class="fa fa-check"></i> Submit</button>
                             </div>
                         </form>

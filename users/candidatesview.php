@@ -4,6 +4,7 @@ if (!isset($_SESSION['username'])) {
     $_SESSION['alert_message'] = "You are Logged Out";
     header("Location: login.php");
 }
+require "../connect.php";
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +15,19 @@ if (!isset($_SESSION['username'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Candidates</title>
+
+    <script src="../library/jquery.min.js"></script>
+    <script src="../library/popper.min.js"></script>
+
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="../library/css/bootstrap.min.css">
+    <!-- Fontawesome -->
+    <link href="../library/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src="../library/fontawesome-free-6.1.1-web/js/all.min.js"></script>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="../library/animate.min.css">
+
+
     <!-- Anurati font -->
     <style>
         @font-face {
@@ -26,59 +38,107 @@ if (!isset($_SESSION['username'])) {
         .anurati {
             font-family: anurati;
         }
+
+        body {
+            background-color: #bfe3e3;
+        }
+
+        .btn-cust {
+            color: #fff;
+            background-color: #b23cfd;
+            text-transform: uppercase;
+            /* vertical-align: bottom; */
+            border: 0;
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 20%), 0 2px 10px 0 rgb(0 0 0 / 10%);
+            font-weight: 500;
+            padding: 0.625rem 1.5rem 0.5rem;
+            font-size: .75rem;
+            line-height: 1.5;
+            display: inline-block;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+
+        .p-cust {
+
+            background-color: #002f75;
+            color: white;
+        }
     </style>
+    <script>
+        $(document).ready(function () {
+            $('#objectives').popover({
+                html: true,
+                animation: true,
+                placement: "bottom",
+                content: "fjao;sdnfpoandsfoahdsfaibsdfibapifdbapisdbfiwefibak;sndfv9ph24rtnksdnaf;",
+                delay: {
+                    "show": 100,
+                    "hide": 100
+                }
+            });            
+        });
+        
+    </script>
 </head>
 
 <body>
     <?php include "./usernav.php"; ?>
 
-    <div class="container-fluid d-grid mt-2">
-        <p class="text-center fs-3 ">Here are all the candidates who you can vote.</p>
-        <div class="row gap-1 fade-in">
+    <?php
+    $pq = mysqli_query($con, "SELECT * FROM posts");
+    while ($row1 = mysqli_fetch_array($pq)) {
+    ?>
+        <div class="container-lg mx-auto my-2 mb-4">
+            <p class="fs-3 p-cust p-2 rounded">
+                <?php echo strtoupper($row1['p_name']); ?>
+            </p>
 
-            <?php
-            require "../connect.php";
-            $query = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate' AND u.cand_approval = 'approved' AND isdel = '0'");
-            while ($row = mysqli_fetch_array($query)) {
-            ?>
+            <div class="d-grid p-2">
+                <div class="row">
+                    <?php
+                    $uq = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate' AND u.cand_approval = 'approved' AND isdel = '0' AND u.cand_post = '" . $row1['p_name'] . "'");
+                    while ($row = mysqli_fetch_array($uq)) {
 
-                <div class="card mx-3 shadow-lg bg-body rounded p-3" style="width: 30rem; height: 27rem;">
-                    <div class="card-img d-flex gap-1" style="height: 10rem;width: 20rem auto;">
-                        <img src="<?php echo '' . $row['photo']; ?>" class="card-img-top rounded-circle p-3 w-50" alt="candidate-image">
-                        <img src="<?php echo '' . $row['insignia']; ?>" class="card-img-top rounded p-3 w-50" alt="candidate-logo">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['name']; ?></h5>
-                        <p class="mb-1">Branch : <?php echo $row['branch']; ?></p>
-                        <p class="mb-1">Post of : <?php echo $row['cand_post']; ?></p>
-                        <p class="card-text mb-4" style="height: 6rem; overflow-x: visible; overflow-y:auto">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus accusamus ipsa possimus voluptatibus nihil, consequatur nam excepturi explicabo repellat alia Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam deserunt eveniet Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos veritatis illum eius? dolorum!</p>
-                        <p class="card-text"><small class="text-muted"><?php echo $row['created']; ?></small></p>
-                    </div>
-                </div>
-
-                <!-- <div class="card " style="max-width: 300px;">
-
-
-                    <img src="" class="img-fluid rounded-start" alt="...">
-
-                    <div class="col-md-8">
-                        <div class="card-body">
-
-                            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus atque asperiores, nemo quam, rem, exercitationem quibusdam cumque ipsam provident alias molestias debitis!</p>
+                    ?>
+                        <div class="col-4" style="max-height: 300px;">
+                            <div class="card" style="width: 18rem; height: 20rem;">
+                                <div class="bg-image hover-overlay ripple text-center" data-mdb-ripple-color="light">
+                                    <img src="<?php echo '' . $row['photo']; ?>" class="img-fluid m-2" style="width: 40%;" alt="DP" />
+                                    <img src="<?php echo '' . $row['insignia']; ?>" class="img-fluid m-2" style="width: 40%; height: 80%;" alt="insignia" />
+                                    <a href="#!">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $row['name']; ?></h5>
+                                    <p class="mb-1">Branch : <?php echo $row['branch']; ?></p>
+                                    <button id="objectives" class="btn btn-secondary btn-cust" data-bs-custom-class="custom-popover" title="<?php echo strtoupper($row['name'] . ' objectives'); ?>">
+                                        View Objectives
+                                    </button>
+                                    <p class="card-text"><small class="text-muted"><?php echo $row['created']; ?></small></p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                </div> -->
-            <?php
-            };
-            ?>
+                    <?php
+                    };
+                    ?>
+                </div>
+            </div>
         </div>
+    <?php
+    };
+    ?>
 
-    </div>
 
+
+    <?php
+    include "./footer.php";
+    ?>
 
     <!-- Bootstrap script -->
     <script src="../library/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

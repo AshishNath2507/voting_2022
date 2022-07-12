@@ -1,7 +1,7 @@
 <nav class="navbar bg-light">
     <!-- above class had fixed-top -->
     <div class="container-fluid">
-        <a class="navbar-brand mx-auto anurati" href="./userhomepage.php">VOTE</a>
+        <a class="navbar-brand mx-auto anurati" href="../userhomepage.php">VOTE</a>
         <button class="navbar-toggler mx-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,7 +13,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./userhomepage.php">Home</a>
+                        <a class="nav-link active" aria-current="page" href="../userhomepage.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./candidatesview.php">Candidates</a>
@@ -34,35 +34,35 @@
                             Candidate
                         </a>
                         <ul class="dropdown-menu bg-info" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="./candidate/election-regulation.php">Run for election</a></li>
-                            <!-- <li><a class="dropdown-item" href="./candidate/c_login.php">Login as candidate</a></li> -->
+                            <li><a class="dropdown-item" href="./election-regulation.php">Run for election</a></li>
+                            <!-- <li><a class="dropdown-item" href="./c_login.php">Login as candidate</a></li> -->
                         </ul>
                     </li>
 
                     <?php
-                    require "../connect.php";
+                    require "../../connect.php";
                     $sid = $_SESSION['id'];
                     $query = mysqli_query($con, "SELECT * FROM users where id = '$sid'");
                     $row = mysqli_fetch_array($query);
                     if ($row['voted'] == 'voted') {
                         $_SESSION['alert_message'] = "You have already voted."
                     ?>
-                        <li class="bg-warning text-dark">
-
-                            <?php echo $_SESSION['alert_message']; ?>
-
+                        <li class="bg-warning text-secondary">
+                             
+                                <?php echo $_SESSION['alert_message']; ?>
+                            
                         </li>
                     <?php
                     } else {
                     ?>
                         <div class="nav-item">
-                            <li><a class="nav-link" href="./vote.php">Vote</a></li>
+                            <li><a class="nav-link" href="../vote.php">Vote</a></li>
                         </div>
                     <?php
                     }
                     ?>
 
-
+                    
 
                     <li>
                         <hr class="divider">

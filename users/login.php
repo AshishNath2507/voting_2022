@@ -14,6 +14,9 @@
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="../library/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/svg.css">
+    <link rel="stylesheet" href="../library/animate.min.css">
+    <link href="../library/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src="../library/fontawesome-free-6.1.1-web/js/all.min.js"></script>
     <style>
         /* .container {
             border-radius: 50px;
@@ -41,10 +44,10 @@
                 <svg version="1.1" class="logo" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" xml:space="preserve">
                     <path fill="#FFFFFF" stroke="#000000" stroke-width="10" stroke-miterlimit="10" d="M57,283" />
                     <g>
-                        <p class="text-center fs-1 m-5 text-light anurati">
+                        <p class="text-center fs-1 m-5 text-light anurati animate__animated animate__fadeInLeft">
                             Student's Login Page
                         </p>
-                        <div class="container-sm">
+                        <div class="container-sm animate__animated animate__fadeInRight">
                             <?php
                             if (isset($_SESSION['alert_message'])) {
                             ?>
@@ -93,6 +96,10 @@
         </div>
         <!--Header ends-->
     </div>
+
+    <?php
+        include "./footer.php";
+    ?>
     <script src="../library/js/bootstrap.bundle.min.js"></script>
 </body>
 

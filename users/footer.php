@@ -44,15 +44,10 @@
                     <h6 class="text-uppercase fw-bold mb-4">
                         <i class="fas fa-gem me-3"></i>Jorhat Engineering College
                     </h6>
-                    <figure>
-                        <blockquote class="blockquote">
-                            <p>In life there is nothing more unexpected and surprising than the arrivals and departures of pleasure. If we find it in one place today, it is vain to seek it there tomorrow. You can not lay a trap for it.</p>
-                        </blockquote>
-                        <figcaption class="blockquote-footer">
-                            <cite title="Source Title">Alexander Smith</cite>
-                        </figcaption>
-                    </figure>
-                    
+                    <p>
+                        Here you can use rows and columns to organize your footer content. Lorem ipsum
+                        dolor sit amet, consectetur adipisicing elit.
+                    </p>
                 </div>
                 <!-- Grid column -->
 
@@ -84,7 +79,7 @@
                         Useful links
                     </h6>
                     <p>
-                        <a href="../users/register.php" class="text-reset">Register</a>
+                        <a href="./candidate/election-regulation.php" class="text-reset">Register for candidature</a>
                     </p>
                     <p>
                         <a href="../users/login.php" class="text-reset">Login</a>

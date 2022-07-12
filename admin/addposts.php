@@ -18,6 +18,16 @@ if (!isset($_SESSION['admin'])) {
     <meta name="author" content="">
 
     <title>Admin - Dashboard</title>
+    
+    <script src="../library/jquery.min.js"></script>
+
+    <!-- DataTable -->
+    <script src="../library/DataTables/datatables.min.js"></script>
+    <script src="../library/DataTables/Buttons-2.2.3/js/buttons.bootstrap5.min.js"></script>
+    <script src="../library/DataTables/Select-1.4.0/js/select.bootstrap5.min.js"></script>
+    <link rel="stylesheet" href="../library/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="../library/DataTables/Buttons-2.2.3/css/buttons.bootstrap5.min.css">
+    <link rel="stylesheet" href="../library/DataTables/Select-1.4.0/css/select.bootstrap5.min.css">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,7 +42,29 @@ if (!isset($_SESSION['admin'])) {
     <link rel="stylesheet" href="../library/fontawesome-free-6.1.1-web/css/solid.css">
     <link rel="stylesheet" href="../library/fontawesome-free-6.1.1-web/css/v5-font-face.css">
 
-    <script src="../library/jquery.min.js"></script>
+    <style>
+        .edit::before {
+            display: inline-block;
+            font: var(--fa-font-solid);
+            content: "\f044";
+            font-weight: 600;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            color: white;
+            border: 0;
+        }
+
+        .delete::before {
+            display: inline-block;
+            font: var(--fa-font-solid);
+            content: "\f2ed";
+            font-weight: 600;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            color: white;
+            border: 0;
+        }
+    </style>
 
 </head>
 
@@ -56,7 +88,7 @@ if (!isset($_SESSION['admin'])) {
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -111,8 +143,8 @@ if (!isset($_SESSION['admin'])) {
             </div>
 
             <!-- Nav Item - Add Posts -->
-            <li class="nav-item">
-                <a class="nav-link" href="./addposts.php">
+            <li class="nav-item active">
+                <a class="nav-link " href="./addposts.php">
                     <i class="fas fa-fw fa-plus"></i>
                     <span>Add Posts</span></a>
             </li>
@@ -363,7 +395,7 @@ if (!isset($_SESSION['admin'])) {
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Posts</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
@@ -541,19 +573,37 @@ if (!isset($_SESSION['admin'])) {
                                     <h6 class="m-0 font-weight-bold text-primary">Names of the Posts</h6>
                                 </div>
                                 <!-- Card Body -->
-                                <div class="card-body">
-                                    <ul class="mx-4">
-                                        <?php
+                                <div class="card-body text-center">
+
+                                    <table id="posts" class="table table-bordered compact display text-secondary" cellspacing="0">
+                                        <thead class="bg-info text-light">
+                                            <tr>
+                                                <th>Slno</th>
+                                                <th>Name</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
                                             $sql = "SELECT * FROM posts";
                                             $result = mysqli_query($con, $sql);
-                                            
-                                            while($row = mysqli_fetch_array($result)){
-                                                ?>
-                                                    <li> <?php echo $row['p_name']; ?> </li>
-                                                <?php
+
+                                            while ($row = mysqli_fetch_array($result)) {
+                                            ?>
+                                                <tr>
+                                                    <th class="post_id"> <?php echo $row['p_id']; ?> </th>
+                                                    <th> <?php echo $row['p_name']; ?> </th>
+                                                    <th>
+
+                                                        <button class="btn btn-danger deletebtn delete rounded-circle mx-1" value="<?php echo $row["p_id"]; ?>"></button>
+                                                    </th>
+                                                </tr>
+                                            <?php
                                             };
-                                        ?>
-                                    </ul>
+                                            ?>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -563,6 +613,64 @@ if (!isset($_SESSION['admin'])) {
 
                 </div>
                 <!-- /.container-fluid -->
+
+                <!-- Delete Modal HTML -->
+                <div id="DeleteModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="../backend/posts.php" method="POST">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Record</h4>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" name="delete_id" class="delete_user_id" readonly>
+
+                                    <p>Are you sure you want to delete these Records?</p>
+                                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
+                                    <input type="submit" name="deletePostButton" class="btn btn-danger" value="Delete">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delete Modal HTML -->
+
+                <!-- Edit Modal HTML -->
+                <div id="editModal" class="modal fade">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form method="POST" action="../backend/posts.php">
+
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Post</h4>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body ">
+                                    <p class="text-secondary">
+                                        Update Post's Name Here
+                                    </p>
+                                    <div class="form-group">
+                                        <label for="">Id</label>
+                                        <input type="text" class="form-control w-25" id="updateid" name="updateid" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control w-75" id="updatename" name="post_name" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btn btn-default pull-left" data-bs-dismiss="modal" value="Cancel">
+                                    <button type="submit" class="btn btn-info" id="updatedata">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Edit Modal HTML -->
 
             </div>
             <!-- End of Main Content -->
@@ -607,25 +715,80 @@ if (!isset($_SESSION['admin'])) {
         </div>
     </div>
 
+    <script>
+        $(document).ready(function() {
+            $('#posts').DataTable();
+        });
+
+        //Delete modal function
+        $(document).ready(function() {
+            $('.deletebtn').click(function(e) {
+                e.preventDefault();
+                var user_id = $(this).val();
+                $('.delete_user_id').val(user_id);
+                $('#DeleteModal').modal('show');
+            });
+        });
+
+        $(document).ready(function(){
+            $('.editbtn').on('click', function() {
+                $('#editModal').modal('show');
+                    $tr = $(this).closest('tr');
+                    var data = $tr.children('td').map(function() {
+                        return $(this).text();
+                    }).get();
+
+                    console.log(data);
+                    $('#updateid').val(data[0]);
+                    $('#updatename').val(data[1]);
+            });
+        });
+
+        $(document).ready(function () {
+            getdata();
+            $('.editbtn').onclick(function(e) {
+                e.preventDefault();
+
+                var post_id = $(this).closest('tr').find('.post_id').text();
+                console.log(post_id);
+
+                $.ajax({
+                    type: "POST",
+                    url: "../backend/posts.php",
+                    data: {
+                        'checking_edit_btn': true,
+                        'post_id': post_id,
+                    },
+                    success: function(response) {
+                        console.log(response)
+
+                        // $('#editModal').modal('show');
+                    }
+                })
+            });
+        });
+
+    </script>
+
     <script src="../library/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+    <!-- <script src="vendor/chart.js/Chart.min.js"></script> -->
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script> -->
 
 </body>
 

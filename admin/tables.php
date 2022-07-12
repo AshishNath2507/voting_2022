@@ -409,7 +409,7 @@
                                         while ($row = mysqli_fetch_array($result)) {
                                         ?>
                                             <tr>
-                                                <td><img src="<?php echo '../' . $row["photo"]; ?>" alt="image" style="width:50px;"></td>
+                                                <td><img src="<?php echo '../uploads' . $row["photo"]; ?>" alt="image" style="width:50px;"></td>
                                                 <td> <?php echo $row["role"]  ?> </td>
                                                 <td> <?php echo $row["name"]  ?> </td>
                                                 <td> <?php echo $row["rollno"] ?></td>

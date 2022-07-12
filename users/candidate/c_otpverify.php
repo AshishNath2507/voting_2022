@@ -77,7 +77,7 @@ if (isset($_POST["verify"])) {
         mysqli_query($con, "INSERT INTO roles VALUES (null, $mainID, 'candidate')");
     ?>
         <script>
-            alert("Verfiy account done, you may sign in now");
+            alert("Account verified. You have successfully registerd as a candidate");
             window.location.replace("../userhomepage.php");
         </script>
 <?php

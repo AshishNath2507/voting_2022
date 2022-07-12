@@ -19,11 +19,11 @@
 				$pos_id = $row['p_id'];
 				if(isset($_POST[$position])){
 
-					$votedquery = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users WHERE id = '$voterId'"));
+					$votedquery = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM users WHERE id = '$voterId' AND cand_approval = 'approved'"));
 
                     
 					$candidate = $_POST[$position];
-					$sql_array[] = "INSERT INTO cand_pc VALUES ( null, '$pos_id', '$candidate', $voterId )";
+					$sql_array[] = "INSERT INTO cand_pc VALUES ( null, '$candidate', '$pos_id', $voterId )";
 					mysqli_query($con, "UPDATE users SET voted = 'voted' WHERE id = '$voterId'");
                     
 					

@@ -21,7 +21,14 @@
             $_SESSION['email'] = $row['email'];
             $_SESSION['photo'] = $row['photo'];
             $_SESSION['email_status'] = $row['email_status'];
-
+            $_SESSION['dob'] = $row['dob'];
+            
+                // For age validation  #####################
+                $dob = $_SESSION['dob'];
+                $today = date("Y-m-d");
+                $diff = date_diff(date_create($dob), date_create($today));
+                $_SESSION['age'] = $diff;
+                // #########################################
             
             if ($dec_pass) {
                 if($row['email_status'] == "verified"){

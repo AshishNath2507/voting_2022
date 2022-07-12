@@ -60,6 +60,14 @@ $row = mysqli_fetch_array($result)
 
     <button type="button" class="btn btn-danger rounded-circle delete deletebtn m-1" value="<?php echo $row["id"]; ?>"></button>
 
+
+    <?php
+        $query = mysqli_query($con, "SELECT * FROM users");
+       
+        while( $row = mysqli_fetch_array($query)) {
+             $row['name'].'</br>';
+        }
+    ?>
 </body>
 
 </html>

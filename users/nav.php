@@ -42,6 +42,8 @@
                         <li><a class="dropdown-item" href="./register.php">Register</a></li>
                         <li><a class="dropdown-item" href="./login.php">Signin</a></li>
                         <li><a class="dropdown-item" href="../can_login.php">Login as candidate</a></li>
+                        <li><a class="dropdown-item" href="../apply_cand.php">Apply for Candidature</a></li>
+
                         <li>
                             <hr class="dropdown-divider">
                         </li>

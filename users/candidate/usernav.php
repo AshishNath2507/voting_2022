@@ -34,7 +34,7 @@
                             Candidate
                         </a>
                         <ul class="dropdown-menu bg-info" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="./candidate_reg.php">Run for election</a></li>
+                            <li><a class="dropdown-item" href="./election-regulation.php">Run for election</a></li>
                             <li><a class="dropdown-item" href="./c_login.php">Login as candidate</a></li>
                         </ul>
                     </li>
