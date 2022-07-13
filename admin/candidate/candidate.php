@@ -160,9 +160,14 @@ if (!isset($_SESSION['admin'])) {
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./candidate-reject.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Candidate Reject</span></a>
+            </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Utilities</span>
@@ -176,7 +181,7 @@ if (!isset($_SESSION['admin'])) {
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -185,9 +190,14 @@ if (!isset($_SESSION['admin'])) {
             <div class="sidebar-heading">
                 Addons
             </div>
+            <li class="nav-item">
+                <a class="nav-link" href="../addposts.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Add Posts</span></a>
+            </li>  
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
@@ -204,14 +214,14 @@ if (!isset($_SESSION['admin'])) {
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
 
 
@@ -468,7 +478,7 @@ if (!isset($_SESSION['admin'])) {
                                             <th>Candidate-email-status</th>
                                             <th>Candidate Approval</th>
                                             <th>Vote-status</th>
-                                            <th>Status</th>
+                                            <th>Eligibility</th>
                                             <th>isDelete</th>
                                             <!-- <th>Created</th> -->
                                             <th>Actions</th>
@@ -503,14 +513,14 @@ if (!isset($_SESSION['admin'])) {
                                         <?php
                                         require "../../connect.php";
                                         $result = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate' ORDER BY u.id DESC");
-                                        while ($row = mysqli_fetch_array($result)) {
+                                        while ($row = mysqli_fetch_array($result)) {                                            
                                         ?>
                                             <tr>
                                                 <td><img class="img-profile rounded" src="<?php echo '../' . $row["photo"]; ?>" alt="image" style="width:50px;"></td>
-                                                <td> <?php echo $row["name"]  ?> </td>
+                                                <td> <a href="../fulldetails.php?id=<?php echo $row["id"]; ?>"> <?php echo $row["name"]  ?> </a> </td>
                                                 <td title="<?php echo $row["email"] ?>"> <?php echo $row["email"] ?> </td>
                                                 <td> <?php echo $row["dob"] ?> </td>
-                                                <td><img src="<?php echo '../' . $row["id_proof"]; ?>" alt="image" style="width:50px;"></td>
+                                                <td> <a href="viewimage.php?id=<?php echo $row["id"]; ?>"> <img data-toggle="modal" data-target="#idProof" src="<?php echo '../' . $row["id_proof"]; ?>" alt="image" style="width:50px;"></a></td>
                                                 <td><img src="<?php echo '../' . $row["insignia"]; ?>" alt="image" style="width:50px;"></td>
 
 
@@ -518,7 +528,7 @@ if (!isset($_SESSION['admin'])) {
                                                 <?php
                                                 if ($row['email_status'] == "verified") {
                                                 ?>
-                                                    <td> <button class="btn btn-success btn-sm bg-transparent text-success disabled"><?php echo $row["email_status"] ?></button> </td>
+                                                    <td> <button class="btn btn-success btn-sm bg-transparent text-success disabled"><?php echo $row["email_status"]?></button> </td>
                                                 <?php
                                                 } else {
                                                 ?>
@@ -542,16 +552,21 @@ if (!isset($_SESSION['admin'])) {
                                                 <?php
                                                 if ($row['cand_approval'] == "approved") {
                                                 ?>
-                                                    <td> <button class="btn btn-success btn-sm"><?php echo $row["cand_approval"] ?></button> </td>
+                                                    <td>
+                                                        <button class="btn btn-success btn-sm"><?php echo $row["cand_approval"] ?></button>
+                                                    </td>
                                                 <?php
                                                 } else {
                                                 ?>
-                                                    <td><button class="btn btn-danger btn-sm apprbtn" name="submit" value="<?php echo $row["id"]; ?>">
+                                                    <td>
+                                                        <button class="btn btn-danger btn-sm apprbtn" name="submit" value="<?php echo $row["id"]; ?>">
                                                             <span class=""><?php echo $row["cand_approval"] ?></span>
-                                                        </button></td>
+                                                        </button>
+                                                    </td>
                                                 <?php
                                                 }
                                                 ?>
+
                                                 <!--  -->
                                                 <?php
                                                 if ($row['voted'] == "voted") {
@@ -620,7 +635,7 @@ if (!isset($_SESSION['admin'])) {
                                         </div>
                                         <div class="modal-footer">
                                             <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                            <input type="submit" name="stuApprButton" class="btn btn-primary" value="Approve">
+                                            <input type="submit" name="boButton" class="btn btn-primary" value="Confirm">
                                         </div>
                                     </form>
                                 </div>

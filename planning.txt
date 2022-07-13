@@ -1,4 +1,4 @@
-Condidate:-
+Candidate:-
 1. sign up with rollno and email
 2. verify with otp
 3. upload full details

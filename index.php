@@ -24,6 +24,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
 
         @font-face {
             font-family: anurati;
@@ -31,7 +32,7 @@
         }
 
         .anurati {
-            font-family: anurati;
+            font-family: 'Iceberg', cursive;
         }
 
         * {

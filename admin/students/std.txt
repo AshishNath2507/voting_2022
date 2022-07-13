@@ -1,24 +1,24 @@
-                                                <td> <?php echo $row["role"]  ?> </td>
-<td> <?php echo $row["rollno"] ?></td>
-                                                <td> <?php echo $row["regno"] ?> </td>
-                                                <td> <?php echo $row["dob"] ?> </td>
-                                                <td title="<?php echo $row["phone"] ?>"> <?php echo $row["phone"] ?> </td>
-                                                <td title="<?php echo $row["addr"] ?>"> <?php echo $row["addr"] ?> </td>
-                                                <td> <?php echo $row["gender"] ?> </td>
-                                                <td title="<?php echo $row["email"] ?>"> <?php echo $row["email"] ?> </td>
-                                                <td> <?php echo $row["pass"] ?> </td>
-                                                <td> <?php echo $row["branch"] ?> </td>
-                                                <td> <?php echo $row["sem"] ?> </td>
-                                                <td> <?php echo $row["insignia"] ?> </td>
-                                                <!--  -->
-                                                <?php
-                                                if ($row['cand_email_verify'] == "verified") {
-                                                ?>
-                                                    <td> <button class="btn btn-success fs-5 bg-transparent text-success disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <td> <button class="btn btn-secondary bg-transparent text-secondary disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
-                                                <?php
-                                                }
-                                                ?>
+    <td> <?php echo $row["role"]  ?> </td>
+    <td> <?php echo $row["rollno"] ?></td>
+    <td> <?php echo $row["regno"] ?> </td>
+    <td> <?php echo $row["dob"] ?> </td>
+    <td title="<?php echo $row["phone"] ?>"> <?php echo $row["phone"] ?> </td>
+    <td title="<?php echo $row["addr"] ?>"> <?php echo $row["addr"] ?> </td>
+    <td> <?php echo $row["gender"] ?> </td>
+    <td title="<?php echo $row["email"] ?>"> <?php echo $row["email"] ?> </td>
+    <td> <?php echo $row["pass"] ?> </td>
+    <td> <?php echo $row["branch"] ?> </td>
+    <td> <?php echo $row["sem"] ?> </td>
+    <td> <?php echo $row["insignia"] ?> </td>
+    <!--  -->
+    <?php
+    if ($row['cand_email_verify'] == "verified") {
+    ?>
+        <td> <button class="btn btn-success fs-5 bg-transparent text-success disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
+    <?php
+    } else {
+    ?>
+        <td> <button class="btn btn-secondary bg-transparent text-secondary disabled"><?php echo $row["cand_email_verify"] ?></button> </td>
+    <?php
+    }
+    ?>

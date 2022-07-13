@@ -21,6 +21,28 @@
             header("Location: ../admin/candidate/candidate.php?user=not+approved");
         }    
     };
+    //Candidate rejection
+    if (isset($_POST['rejCandButton'])) {
+        
+        $userid = $_POST['rej_id'];
+        $query = mysqli_query($con, "SELECT * FROM users WHERE id = $userid");
+        $row = mysqli_fetch_array($query);
+
+        if ($row['cand_approval'] == "rejected") {
+            $_SESSION['alert_message'] = "User is already rejected";
+            header("Location: ../admin/candidate/candidate-reject.php?user=already+rejected");            
+        } 
+        else if ($row['cand_approval'] == "approved") {
+            mysqli_query($con, "UPDATE `users` SET `cand_approval` = 'rejected' WHERE `users`.`id` = $userid");
+            $_SESSION['alert_message'] = "Candidate approved successfully";
+            header("Location: ../admin/candidate/candidate-reject.php?user=rejected");
+
+        } 
+        else {
+            $_SESSION['alert_message'] = "User Approval Failed";
+            header("Location: ../admin/candidate/candidate-reject.php?user=not+rejection+failed");
+        }    
+    };
 
     
     // Candidate delete

@@ -87,9 +87,14 @@ if (!isset($_SESSION['admin'])) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Management:</h6>
                         <a class="collapse-item" href="./students/student.php">Students</a>
-                        <a class="collapse-item" href="./candidate/candidate.php">Candidates</a>
+                        <a class="collapse-item" href="./candidate/candidate.php">Candidates</a>                        
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./candidate/candidate-reject.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Candidate Reject</span></a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
@@ -122,10 +127,10 @@ if (!isset($_SESSION['admin'])) {
                 <a class="nav-link" href="./addposts.php">
                     <i class="fas fa-fw fa-plus"></i>
                     <span>Add Posts</span></a>
-            </li>
+            </li>           
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
@@ -142,15 +147,15 @@ if (!isset($_SESSION['admin'])) {
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.php">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">

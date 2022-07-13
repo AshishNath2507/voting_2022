@@ -5,6 +5,8 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
 }
 require "../connect.php";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -66,19 +68,16 @@ require "../connect.php";
         }
     </style>
     <script>
-        $(document).ready(function () {
-            $('#objectives').popover({
+        $(document).ready(function() {
+
+            $('.objectives').popover({
                 html: true,
-                animation: true,
-                placement: "bottom",
-                content: "fjao;sdnfpoandsfoahdsfaibsdfibapifdbapisdbfiwefibak;sndfv9ph24rtnksdnaf;",
-                delay: {
-                    "show": 100,
-                    "hide": 100
-                }
-            });            
+                placement: "right"
+                // content: "fjao;sdnfpoandsfoahdsfaibsdfibapifdbapisdbfiwefibak;sndfv9ph24rtnksdnaf;",
+            });
         });
-        
+
+        $(function() {});
     </script>
 </head>
 
@@ -99,13 +98,17 @@ require "../connect.php";
                     <?php
                     $uq = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate' AND u.cand_approval = 'approved' AND isdel = '0' AND u.cand_post = '" . $row1['p_name'] . "'");
                     while ($row = mysqli_fetch_array($uq)) {
+                       
+                        $ob = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM objectives WHERE cand_id = '".$row['id']."'"));
+                        // echo json_decode($ob['objs']);
+
 
                     ?>
                         <div class="col-4" style="max-height: 300px;">
                             <div class="card" style="width: 18rem; height: 20rem;">
                                 <div class="bg-image hover-overlay ripple text-center" data-mdb-ripple-color="light">
-                                    <img src="<?php echo '' . $row['photo']; ?>" class="img-fluid m-2" style="width: 40%;" alt="DP" />
-                                    <img src="<?php echo '' . $row['insignia']; ?>" class="img-fluid m-2" style="width: 40%; height: 80%;" alt="insignia" />
+                                    <img src="<?php echo '../uploads/' . $row['photo']; ?>" class="img-fluid m-2" style="width: 40%;" alt="DP" />
+                                    <img src="<?php echo '../uploads/' . $row['insignia']; ?>" class="img-fluid m-2" style="width: 40%; height: 80%;" alt="insignia" />
                                     <a href="#!">
                                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
                                     </a>
@@ -113,7 +116,15 @@ require "../connect.php";
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $row['name']; ?></h5>
                                     <p class="mb-1">Branch : <?php echo $row['branch']; ?></p>
-                                    <button id="objectives" class="btn btn-secondary btn-cust" data-bs-custom-class="custom-popover" title="<?php echo strtoupper($row['name'] . ' objectives'); ?>">
+                                    <button class="btn btn-secondary btn-cust objectives" data-bs-trigger="focus" title="<?php echo strtoupper($row['name'] . ' objectives'); ?>" data-bs-content="
+                                    <?php 
+                                    if($ob['objs'] == null) {
+                                        echo "NO OBJECTIVES ADDED";
+                                    }else{
+                                        echo json_decode($ob['objs']); 
+                                    }
+                                    ?>
+                                    ">
                                         View Objectives
                                     </button>
                                     <p class="card-text"><small class="text-muted"><?php echo $row['created']; ?></small></p>

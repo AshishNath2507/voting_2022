@@ -17,7 +17,7 @@ if (!isset($_SESSION['admin'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Dashboard</title>
+    <title>Admin - Add Posts</title>
     
     <script src="../library/jquery.min.js"></script>
 
@@ -116,9 +116,14 @@ if (!isset($_SESSION['admin'])) {
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./candidate/candidate-reject.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Candidate Reject</span></a>
+            </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Utilities</span>
@@ -132,7 +137,7 @@ if (!isset($_SESSION['admin'])) {
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -150,7 +155,7 @@ if (!isset($_SESSION['admin'])) {
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
@@ -167,15 +172,15 @@ if (!isset($_SESSION['admin'])) {
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">

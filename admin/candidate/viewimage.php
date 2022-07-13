@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin'])) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Students Table</title>
+    <title>Admin - Candidates Table</title>
 
     <!-- Custom fonts for this template -->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,88 +30,8 @@ if (!isset($_SESSION['admin'])) {
 
     <link rel="stylesheet" href="../../library/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="../../library/fontawesome-free-6.1.1-web/css/all.css">
-    <link rel="stylesheet" href="../../library/fontawesome-free-6.1.1-web/css/brands.css">
-    <link rel="stylesheet" href="../../library/fontawesome-free-6.1.1-web/css/solid.css">
-
-    <link rel="stylesheet" href="../../library/fontawesome-free-6.1.1-web/css/v5-font-face.css">
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="../../library/jquery.min.js"></script>
-
-    <style>
-        body{
-            scroll-behavior: smooth;
-        }
-        td {
-            max-width: 150px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-        }
-
-        /* tr:last-child(){
-            width: 300px;
-        } */
-
-        tr {
-            height: 10px;
-        }
-
-        tr:nth-child(even) {
-            background-color: rgb(236, 234, 234);
-        }
-
-        thead {
-            background-color: #024a74;
-            color: white;
-            text-align: center;
-            font-size: .5 rem;
-        }
-
-        th,
-        td, tr {
-            padding: 15px;
-            text-align: center;
-        }
-
-        .actions {
-            display: flex;
-            justify-content: space-evenly;
-            gap: 1 rem;
-        }
-
-        .edit::before {
-            display: inline-block;
-            font: var(--fa-font-solid);
-            content: "\f044";
-            font-weight: 600;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            color: white;
-            border: 0;
-        }
-
-        .delete::before {
-            display: inline-block;
-            font: var(--fa-font-solid);
-            content: "\f2ed";
-            font-weight: 600;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            color: white;
-            border: 0;
-        }
-
-        .appr::before {
-            display: inline-block;
-            font: var(--fa-font-solid);
-            content: "\e53e";
-            font-weight: 600;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            color: white;
-            border: 0;
-        }
-    </style>
 
 </head>
 
@@ -156,18 +76,14 @@ if (!isset($_SESSION['admin'])) {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Management:</h6>
-                        <a class="collapse-item" href="#">Students</a>
-                        <a class="collapse-item" href="../candidate/candidate.php">Candidates</a>
+                        <a class="collapse-item" href="../students/student.php">Students</a>
+                        <a class="collapse-item" href="#">Candidates</a>
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../candidate/candidate-reject.php">
-                    <i class="fas fa-fw fa-plus"></i>
-                    <span>Candidate Reject</span></a>
-            </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Utilities</span>
@@ -181,7 +97,7 @@ if (!isset($_SESSION['admin'])) {
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li> -->
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -191,40 +107,15 @@ if (!isset($_SESSION['admin'])) {
                 Addons
             </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href="../addposts.php">
-                    <i class="fas fa-fw fa-plus"></i>
-                    <span>Add Posts</span></a>
-            </li>    
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li> -->
 
             <!-- Nav Item - Charts -->
-            <!-- <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Charts</span></a>
-            </li> -->
+            </li>
 
-            <!-- Nav Item - Tables -->
 
 
             <!-- Divider -->
@@ -436,232 +327,53 @@ if (!isset($_SESSION['admin'])) {
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Students Table</h1>
-                    <p class="mb-4">The below shown table is sorted by role = STUDENT.</p>
+                    <div class="card shadow">                      
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Role = STUDENT</h6>
-                        </div>
                         <?php
-                        if (isset($_SESSION['alert_message'])) {
+                        require "../../connect.php";
+                        $id = $_GET['id'];
+                        $query = mysqli_query($con, "SELECT * FROM users WHERE id = '$id' ");
+                        $row = mysqli_fetch_array($query);
                         ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Alert!!!</strong> <?php echo $_SESSION['alert_message']; ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        <?php
-                            unset($_SESSION['alert_message']);
-                        }
-                        ?>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered compact display" id="dataTable" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Photo</th>
-                                            <!-- <th>Role</th> -->
-                                            <th>Name</th>
-                                            <th>Rollno</th>
-                                            <th>Regno</th>
-                                            <!-- <th>DOB</th> -->
-                                            <!-- <th>Phone</th> -->
-                                            <!-- <th>Address</th> -->
-                                            <!-- <th>Gender</th> -->
-                                            <!-- <th>Email</th> -->
-                                            <!-- <th>Password</th>  -->
-                                            <th>Id-proof</th>
-                                            <!-- <th>Branch</th>
-                                            <th>Semester</th>
-                                            <th>Insignia</th> -->
-                                            <th>Email-status</th>
-                                            <!-- <th>Candidate-email-status</th> -->
-                                            <th>Vote-status</th>
-                                            <th>Eligibility</th>
-                                            <th>isDelete</th>
-                                            <!-- <th>Created</th> -->
-                                            <th>Actions</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Photo</th>
-                                            <!-- <th>Role</th> -->
-                                            <th>Name</th>
-                                             <th>Rollno</th>
-                                            <th>Regno</th>
-                                            <!-- <th>DOB</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
-                                            <th>Gender</th>
-                                            <th>Email</th>
-                                            <th>Password</th> -->
-                                            <th>Id-proof</th>
-                                            <!-- <th>Branch</th>
-                                            <th>Semester</th> -->
-                                            <!-- <th>Insignia</th> -->
-                                            <th>Email-status</th>
-                                            <!-- <th>Candidate-email-status</th> -->
-                                            <th>Vote-status</th>
-                                            <th>Eligibility</th>
-                                            <th>isDelete</th>
-                                            <!-- <th>Created</th> -->
-                                            <th>Actions</th>
-
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <?php
-                                        require "../../connect.php";
-                                        $result = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'student' AND u.isdel = '0'");
-                                        while ($row = mysqli_fetch_array($result)) {
-                                        ?>
-                                            <tr>
-                                                <td><img class="img-profile rounded" src="<?php echo '../' . $row["photo"]; ?>" alt="image" style="width:50px;"></td>
-                                                <td><a href="../fulldetails.php?id=<?php echo $row["id"]; ?>"> <?php echo $row["name"]  ?> </a></td>
-                                                <td> <?php echo $row["rollno"] ?></td>
-                                                <td> <?php echo $row["regno"] ?> </td>
-                                                <td> <a href="viewimage.php?id=<?php echo $row["id"]; ?>"> <img data-toggle="modal" data-target="#idProof" src="<?php echo '../' . $row["id_proof"]; ?>" alt="image" style="width:50px;"></a></td>
-                                                
-                                                <!--  -->
-                                                <?php
-                                                if ($row['email_status'] == "verified") {
-                                                ?>
-                                                    <td> <button class="btn btn-success btn-sm bg-transparent text-success disabled"><?php echo $row["email_status"] ?></button> </td>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <td> <button class="btn btn-secondary btn-sm bg-transparent text-secondary disabled"><?php echo $row["email_status"] ?></button> </td>
-                                                <?php
-                                                }
-                                                ?>
-                                                
-                                                <!--  -->
-                                                <?php
-                                                if ($row['voted'] == "voted") {
-                                                ?>
-                                                    <td> <button class="btn btn-success btn-sm bg-transparent text-success disabled"><?php echo $row["voted"] ?></button> </td>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <td> <button class="btn btn-secondary btn-sm bg-transparent text-secondary disabled"><?php echo $row["voted"] ?></button> </td>
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--  -->
-                                                <?php
-                                                if ($row['status'] == "approved") {
-                                                ?>
-                                                    <td> <button class="btn btn-success btn-sm"><?php echo $row["status"] ?></button> </td>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <td><button class="btn btn-danger btn-sm apprbtn" name="submit" value="<?php echo $row["id"]; ?>">
-                                                            <span class=""><?php echo $row["status"] ?></span>
-                                                        </button></td>
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--  -->
-                                                <?php
-                                                if ($row['isdel'] == "1") {
-                                                ?>
-                                                    <td> <button class="btn btn-danger btn-sm disabled"><?php echo $row["isdel"] ?></button> </td>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <td> <button class="btn btn-success btn-sm disabled"><?php echo $row["isdel"] ?></button> </td>
-                                                <?php
-                                                }
-                                                ?>
-                                                <!--  -->
-                                                
-                                                <!--  -->
-                                                <td class="actions">
-                                                    <button type="button" class="btn btn-danger rounded-circle delete deletebtn m-1" value="<?php echo $row["id"]; ?>"></button>
-                                                </td>
-                                            </tr>
-                                        <?php
-                                        };
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- Approval Modal HTML -->
-                        <div id="apprModal" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="../../backend/allstd.php" method="POST">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Approved Record</h4>
-                                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="text" name="appr_id" class="appr_user_id border-0 outline-0 text-danger" readonly>
-
-                                            <p>Are you sure you want to approve this Record?</p>
-                                            <p class="text-warning"><small>This action cannot be undone.</small></p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                            <input type="submit" name="apprStuButton" class="btn btn-primary" value="Approve">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Approval Modal HTML -->
-                        <!-- Delete Modal HTML -->
-                        <div id="DeleteModal" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form action="../../backend/allstd.php" method="POST">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Delete Record</h4>
-                                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="text" name="delete_id" class="delete_user_id" readonly>
-
-                                            <p>Are you sure you want to delete these Records?</p>
-                                            <p class="text-warning"><small>This action cannot be undone.</small></p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-                                            <input type="submit" name="deleteStuButton" class="btn btn-danger" value="Delete">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Delete Modal HTML -->
+                        <h4 class="modal-title p-3 mb-3">ID Proof of '<?php echo $row["name"]; ?>'</h4>
+                        <img src="<?php echo '../' . $row["id_proof"]; ?>" class="img-fluid p-3" alt="image" width="100%">
 
                     </div>
+
+
+
                 </div>
-                <!-- /.container-fluid -->
             </div>
-            <!-- End of Main Content -->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+
         </div>
-        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2020</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
     </div>
     <!-- End of Page Wrapper -->
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -680,37 +392,6 @@ if (!isset($_SESSION['admin'])) {
             </div>
         </div>
     </div>
-    <script>
-        //Approval modal function
-        $(document).ready(function() {
-            $('.apprbtn').click(function(e) {
-                e.preventDefault();
-                // if the button has any value, it will be stored in "user_id"
-                var user_id = $(this).val();
-                $('.appr_user_id').val(user_id);
-                $('#apprModal').modal('show');
-            });
-        });
-
-        //Delete modal function
-        $(document).ready(function() {
-            $('.deletebtn').click(function(e) {
-                e.preventDefault();
-                var user_id = $(this).val();
-                $('.delete_user_id').val(user_id);
-                $('#DeleteModal').modal('show');
-            });
-        });
-
-        //Edit modal function
-        $(document).ready(function() {
-            $('.editbtn').click(function(e) {
-                e.preventDefault();
-                var user_id = $(this).val();
-                $('.edit_user_id').val(user_id);
-                $('#editModal').modal('show');
-            });
-        });
     </script>
 
     <script src="../../library/js/bootstrap.bundle.min.js"></script>

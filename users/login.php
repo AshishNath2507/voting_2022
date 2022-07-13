@@ -17,16 +17,11 @@
     <link rel="stylesheet" href="../library/animate.min.css">
     <link href="../library/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
     <script src="../library/fontawesome-free-6.1.1-web/js/all.min.js"></script>
-    <style>
-        /* .container {
-            border-radius: 50px;
-            background: white;
-            box-shadow: 20px 20px 60px #bebebe,
-                -20px -20px 60px #ffffff;
-        } */
-        @font-face { font-family: anurati; src: url('../library/fonts/anurati/ANURATI/Anurati-Regular.otf'); } 
+    <style>        
+        @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
+
         .anurati {
-            font-family: anurati;
+            font-family: 'Iceberg', cursive;
         }
     </style>
 </head>

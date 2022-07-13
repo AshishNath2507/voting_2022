@@ -22,14 +22,15 @@ require "../connect.php";
     <script src="../library/fontawesome-free-6.1.1-web/js/all.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
 
-        @font-face {
+        /* @font-face {
             font-family: anurati;
             src: url('../library/fonts/anurati/ANURATI/Anurati-Regular.otf');
-        }
+        } */
 
         .anurati {
-            font-family: anurati;
+            font-family: 'Iceberg', cursive;
         }
 
         body {
@@ -110,7 +111,7 @@ require "../connect.php";
             <div class="row">
                 <div class="col">
                     <div class="text-center">
-                        <p class="fs-2">HOW TO VOTE IN OUR SYSTEM</p>
+                        <p class="fs-2">HOW OUR SYSTEM WORKS</p>
                     </div>
                     <div class="container">
                         <ul class="lists">
@@ -128,7 +129,7 @@ require "../connect.php";
         </div>
     </div>
 
-    <div class="section" style="background-color: #42c2d0;">
+    <div class="section p-3 mt-2" style="background-color: #42c2d0;">
         <div class="container-fluid mt-2">
             <p class="text-center fs-2">
             How the Ballot Results are Calculated
