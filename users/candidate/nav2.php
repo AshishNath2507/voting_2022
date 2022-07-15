@@ -16,16 +16,15 @@
                         <a class="nav-link active" aria-current="page" href="../userhomepage.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./candidatesview.php">Candidates</a>
+                        <a class="nav-link" href="../candidatesview.php">Candidates</a>
                     </li>
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Profile
                         </a>
                         <ul class="dropdown-menu bg-info" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-
+                            <li><a class="dropdown-item" href="../userview.php">View</a></li>
+                            <li><a class="dropdown-item" href="../useredit.php">Edit</a></li>
                         </ul>
                     </li>
 
@@ -34,7 +33,7 @@
                             Candidate
                         </a>
                         <ul class="dropdown-menu bg-info" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="./election-regulation.php">Run for election</a></li>
+                            <li><a class="dropdown-item" href="./election-regulation.php">Apply for Candidature</a></li>
                             <!-- <li><a class="dropdown-item" href="./c_login.php">Login as candidate</a></li> -->
                         </ul>
                     </li>

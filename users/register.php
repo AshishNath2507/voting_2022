@@ -28,23 +28,29 @@ session_start();
         @font-face {
             font-family: anurati;
             src: url('../library/fonts/anurati/ANURATI/Anurati-Regular.otf');
-            
+
         }
 
         .anurati {
             font-family: 'Iceberg', cursive;
         }
 
-        body{
+        body {
             background-color: #337171;
             color: white;
         }
+
         .c-font {
             font-family: 'Jost', sans-serif;
 
         }
-        .form input{
+
+        .form input {
             background-color: #e5e9b8;
+        }
+
+        .error-form{
+            color: #c00909;
         }
     </style>
 </head>
@@ -52,7 +58,7 @@ session_start();
 <body>
     <?php include "nav.php"; ?>
 
-    <div class="container-lg c-font" >
+    <div class="container-lg c-font">
         <p class="text-center mt-3 mb-5 fs-1">Register Here!!!</p>
         <div class="container-lg">
 
@@ -72,39 +78,54 @@ session_start();
 
                 <div class="col-md-12 mb-1 ">
                     <label for="name" class="form-label w-25">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" autofocus required>
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" accept="text" autofocus required>
+                    <span class="error-form text-shadow" id="name_error_message"></span>
                 </div>
 
                 <div class="col-md-4 mb-1">
                     <label for="rollno" class="form-label">Roll No.</label>
-                    <input type="text" class="form-control" id="rollno" name="rollno" aria-describedby="rollHelp" required>
+                    <input type="text" class="form-control" id="rollno" name="rollno" minlength="6" aria-describedby="rollHelp" required>
+                    <span class="error-form text-shadow" id="rollno_error_message"></span>
                 </div>
 
                 <div class="col-md-4 mb-1">
                     <label for="regno" class="form-label">Registration No.</label>
-                    <input type="text" class="form-control" id="regno" name="regno" aria-describedby="regHelp" required>
+                    <input type="text" class="form-control" id="regno" name="regno" minlength="6" aria-describedby="regHelp" required>
+                    <span class="error-form text-shadow" id="regno_error_message"></span>
                 </div>
 
                 <div class="col-md-4 mb-1">
                     <label for="sob" class="form-label w-25">DoB</label>
                     <input type="date" class="form-control w-50" id="dob" name="dob" aria-describedby="dobHelp" required>
+                    <span class="error-form text-shadow" id="dob_error_message"></span>
+
                 </div>
 
                 <div class="mb-1 col-md-5">
                     <label for="phone" class="form-label w-25">Phone No.</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" aria-describedby="telHelp" required>
+                    <input type="tel" class="form-control" id="phone" name="phone" aria-describedby="telHelp" onchange="validatePhone()" required>
+                    <span class="error-form text-shadow" id="phone_error_message"></span>
+
+                    <!-- <div>
+                        <p id="sub"></p>
+                    </div>
+                    <div>
+                        <p id="result1"></p>
+                    </div> -->
                 </div>
 
                 <div class="mb-1 col-md-7">
                     <label for="addr" class="form-label w-25">Address</label>
                     <input type="text" class="form-control" id="addr" name="addr" aria-describedby="addrHelp" required>
                 </div>
+                <hr>
+                <br>
 
                 <div class="mb-1 col-md-4">
-                    <label for="gender" class="form-label w-25">Gender</label>
+                    <!-- <label for="gender" class="form-label w-25">Gender</label> -->
                     <div class="input-group mb-1">
-                        <label class="input-group-text" for="gender">Options</label>
-                        <select class="form-select" name="gender" id="gender"required>
+                        <label class="input-group-text" for="gender">Gender</label>
+                        <select class="form-select" name="gender" id="gender" required>
                             <option selected>Choose...</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -114,10 +135,10 @@ session_start();
                 </div>
 
                 <div class="mb-1 col-md-4">
-                    <label for="branch" class="form-label w-25">Branch</label>
+                    <!-- <label for="branch" class="form-label w-25">Branch</label> -->
                     <div class="input-group mb-1">
-                        <label class="input-group-text" for="branch">Options</label>
-                        <select class="form-select" name="branch" id="branch"required>
+                        <label class="input-group-text" for="branch">Branch</label>
+                        <select class="form-select" name="branch" id="branch" required>
                             <option selected>Choose...</option>
                             <option value="civil">Civil</option>
                             <option value="mechanical">Mechanical</option>
@@ -129,10 +150,10 @@ session_start();
                 </div>
 
                 <div class="mb-1 col-md-4">
-                    <label for="sem" class="form-label w-25">Semester</label>
+                    <!-- <label for="sem" class="form-label w-25">Semester</label> -->
                     <div class="input-group mb-1">
-                        <label class="input-group-text" for="semester">Options</label>
-                        <select class="form-select" name="sem" id="semester"required>
+                        <label class="input-group-text" for="semester">Semester</label>
+                        <select class="form-select" name="sem" id="semester" required>
                             <option selected>Choose...</option>
                             <option value="1">1st</option>
                             <option value="2">2nd</option>
@@ -176,7 +197,12 @@ session_start();
                         <label for="email" class="form-label w-25">Email address</label>
                         <!-- <div class="col"> -->
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" onkeyup="validateEmail()" required>
+                        <span class="error-form text-shadow mx-4" id="email_error_message"></span>
+
+                        <div>
+                            <p id="result"></p>
+                        </div>
                         <!-- </div> -->
                         <!-- <div class="col">
                             <a class="btn btn-primary" onclick="checkOTP()">send OTP</a>
@@ -209,7 +235,9 @@ session_start();
                         <label for="password" class="form-label w-25">Password</label>
                         <span class="input-group-text" id="inputGroupPrepend">***</span>
                         <input type="password" name="password" id="password" class="form-control" aria-describedby="passwordHelpBlock" required>
+                        <span class="error-form text-shadow mx-4" id="password_error_message"></span>
                     </div>
+
                     <div id="passwordHelpBlock" class="form-text text-info">
                         <p>
                             Your password must be 6-20 characters long,
@@ -221,7 +249,7 @@ session_start();
 
                 <div class="col-12">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" >
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                         <label class="form-check-label fs-5" for="invalidCheck">
                             Agree to terms and conditions
                         </label>
@@ -241,6 +269,53 @@ session_start();
     <?php
     include "../includes/footer.php";
     ?>
+
+    <script type="text/javascript">
+       
+    </script>
+
+
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+    <!-- <script type="text/javascript">
+        function validatePhone(phone) {
+            const re1 = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+            return re1.test(phone);
+        }
+
+        function validatephone() {
+            const $result = $("#result1");
+            const phone = $("#phone").val();
+            const $sub = $("#sub");
+
+            $result.text("");
+
+            if (validatePhone(phone)) {
+                $result.text("Phone Number is valid");
+                $result.css("color", "yellow");
+                $sub.prop("disabled", false);
+
+            } else {
+                $result.text(" Phone Number is not valid ");
+                $result.css("color", "red");
+                $sub.prop("disabled", true);
+            }
+            return false;
+        }
+
+        function validateEmail(email) {
+            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        function validate() {
+            const $result = $("#result");
+            const email = $("#email").val();
+            const $sub = $("#sub");
+            $result.text("");
+        }
+    </script> -->
 
 
     <script src="../library/js/bootstrap.bundle.min.js"></script>

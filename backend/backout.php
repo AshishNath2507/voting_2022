@@ -9,7 +9,7 @@
 
         if ($row['cand_email_verify'] == "verified") {
             mysqli_query($con, "UPDATE users SET cand_approval = 'backed-out', cand_post = '' WHERE id = '$userid'");
-            mysqli_query($con, "DELETE FROM roles WHERE user_id= '$userid' AND role ='candidate'");
+            mysqli_query($con, "DELETE FROM roles WHERE user_id = '$userid' AND role ='candidate'");
             $_SESSION['alert_message'] = "Your candidature is lost for this election.";
             header("Location: ../users/userview.php?user=backout");
         } 

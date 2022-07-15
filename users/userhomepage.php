@@ -42,15 +42,17 @@ require "../connect.php";
             max-width: 600px;
         }
 
-        .lists > li {
+        .lists>li {
             list-style: none;
             padding: 18px;
             font-size: 1rem;
             border-radius: 40px;
         }
+
         .lists li:nth-child(even) {
             background-color: #e9e5e5;
         }
+
         .lists li:nth-child(odd) {
             background-color: #bee9be;
         }
@@ -84,6 +86,18 @@ require "../connect.php";
     <!-- ################################################################################################################### -->
     <div class="section">
         <div class="container-fluid bg-light d-grid ">
+            <?php
+            if (isset($_SESSION['alert_message'])) {
+            ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Hey!!!</strong> <?php echo $_SESSION['alert_message']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <?php
+                // echo $_SESSION['alert_message'];
+                unset($_SESSION['alert_message']);
+            }
+            ?>
             <div class="row">
                 <div class="col animate__animated animate__fadeInLeft">
                     <img class="img-fluid rounded first-img" src="../photos/vote.jpg" alt="">
@@ -132,16 +146,16 @@ require "../connect.php";
     <div class="section p-3 mt-2" style="background-color: #42c2d0;">
         <div class="container-fluid mt-2">
             <p class="text-center fs-2">
-            How the Ballot Results are Calculated
+                How the Ballot Results are Calculated
             </p>
             <p class="text-center fs-5">
-            A simple vote counting algorithm is used to count the votes cast on the ballots during approval voting and determine the results of the election. The winner is the candidate (or candidates, in the event of a tie) who receives the most votes (i.e., is most approved by the voters).
+                A simple vote counting algorithm is used to count the votes cast on the ballots during approval voting and determine the results of the election. The winner is the candidate (or candidates, in the event of a tie) who receives the most votes (i.e., is most approved by the voters).
             </p>
         </div>
     </div>
 
     <?php
-        include "./footer.php";
+    include "./footer.php";
     ?>
 
     <script src="../library/js/bootstrap.bundle.min.js"></script>

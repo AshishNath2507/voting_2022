@@ -229,6 +229,11 @@ if (!isset($_SESSION['admin'])) {
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="../result.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Result</span></a>
+            </li> 
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -470,7 +475,7 @@ if (!isset($_SESSION['admin'])) {
                                             <!-- <th>Phone</th> -->
                                             <!-- <th>Address</th> -->
                                             <!-- <th>Gender</th> -->
-                                            <!-- <th>Email</th> -->
+                                            <th>Email</th>
                                             <!-- <th>Password</th>  -->
                                             <th>Id-proof</th>
                                             <!-- <th>Branch</th>
@@ -496,9 +501,9 @@ if (!isset($_SESSION['admin'])) {
                                             <!-- <th>DOB</th>
                                             <th>Phone</th>
                                             <th>Address</th>
-                                            <th>Gender</th>
+                                            <th>Gender</th> -->
                                             <th>Email</th>
-                                            <th>Password</th> -->
+                                            <!-- <th>Password</th>  -->
                                             <th>Id-proof</th>
                                             <!-- <th>Branch</th>
                                             <th>Semester</th> -->
@@ -524,6 +529,7 @@ if (!isset($_SESSION['admin'])) {
                                                 <td><a href="../fulldetails.php?id=<?php echo $row["id"]; ?>"> <?php echo $row["name"]  ?> </a></td>
                                                 <td> <?php echo $row["rollno"] ?></td>
                                                 <td> <?php echo $row["regno"] ?> </td>
+                                                <td> <?php echo $row["email"] ?> </td>
                                                 <td> <a href="viewimage.php?id=<?php echo $row["id"]; ?>"> <img data-toggle="modal" data-target="#idProof" src="<?php echo '../' . $row["id_proof"]; ?>" alt="image" style="width:50px;"></a></td>
                                                 
                                                 <!--  -->

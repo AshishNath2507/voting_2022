@@ -14,15 +14,26 @@ require "connect.php";
     <script src="./library/jquery.min.js"></script>
     <!-- Bootstrap links -->
     <link rel="stylesheet" href="./library/css/bootstrap.min.css">
+
+    <link href="./library/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src="./library/fontawesome-free-6.1.1-web/js/all.min.js"></script>
     <!-- Anurati font -->
     <style>
-        @font-face {
+        @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap');
+
+        /* @font-face {
             font-family: anurati;
             src: url('./library/fonts/anurati/ANURATI/Anurati-Regular.otf');
-        }
+        } */
 
         .anurati {
-            font-family: anurati;
+            font-family: 'Iceberg', cursive;
+        }
+
+        
+        
+        table th {
+            width: 100px;
         }
     </style>
 </head>
@@ -30,52 +41,52 @@ require "connect.php";
 <body>
 
     <?php include "nav.php"; ?>
-
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">candidate name</th>
-                    <th scope="col">counter</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h3 class="m-0 ">Vote Result</h3>
+                <hr class="bg-info">
+                <div class="dropdown no-arrow text-center">
                     <?php
-                    $sql = "SELECT * FROM users AS u INNER JOIN roles AS r ON ( u.id = r.user_id) INNER JOIN cand_pc AS cp ON (r.user_id = cp.candidate_id AND u.id = cp.voter_id)";
-
-                    $slq = "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE role = 'candidate'";
-                    $result = mysqli_query($con, $sql);
-                    while ($row = mysqli_fetch_array($result)) {
+                    $post = mysqli_query($con, "SELECT * FROM posts ORDER BY p_id ASC");
+                    while ($postRow = mysqli_fetch_array($post)) {
                     ?>
-                        <td><?php echo $row['name']; ?></td>
-                    <?php
+                        <p class="text-warning"><?php $postRow['p_name'] ?></p>
+                        <?php
+                        $voter_sql = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON ( u.id = r.user_id ) WHERE r.role = 'candidate' AND u.cand_post = '" . $postRow['p_name'] . "' ");
+                        while ($voterRow = mysqli_fetch_array($voter_sql)) {
+                            $cand_sql = mysqli_query($con, "SELECT COUNT(*) AS total FROM cand_pc WHERE candidate_id = '" . $voterRow['user_id'] . "' AND candidate_post = '" . $postRow['p_id'] . "' ");
+                            $candRow =  mysqli_fetch_assoc($cand_sql);
+                            $count = mysqli_num_rows($cand_sql);
+                        ?>
+                            <table class="table table-bordered compact display text-dark">
+
+                                <thead class="bg-info text-light">
+                                    <tr>
+                                        <th>Candidate's Name</th>
+                                        <th>Post Name</th>
+                                        <th>Vote Counts</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo $voterRow['name']; ?></td>
+                                        <td> <?php echo $postRow['p_name']; ?></td>
+                                        <td><?php echo $candRow['total']; ?></td>
+                                    </tr>
+                                </tbody>
+                        <?php
+
+                        };
                     };
-                    ?>
-
-                    
-                </tr>
-
-            </tbody>
-        </table>
+                        ?>
+                </div>
+            </div>
+        </div>
     </div>
-    <?php
-        $s = "select * from cand_pc where candidate_post = 'Boys Common Room Secretary'";
-        $q = mysqli_query($con, $s);
-        $count = mysqli_num_rows($q);
-        echo $count;
-                    $n = "SELECT user_id FROM roles WHERE role = 'candidate'";
-                    $t = mysqli_query($con, $n);
-                    $r = mysqli_fetch_array($t);
-                    if(in_array('31', $r)){
-                        echo 'match';
-                    }else{
-                        echo 'n';
-                    }
-
-?>
 
 
+    
     <!-- Bootstrap script -->
     <script src="./library/js/bootstrap.bundle.min.js"></script>
 </body>

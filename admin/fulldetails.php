@@ -58,6 +58,10 @@ require "../connect.php";
             width: 300px;
             height: 184px;
         }
+        .bg-seco{
+            background-color: #ececec;
+            color: #333 !important;
+        }
     </style>
 
 </head>
@@ -270,7 +274,7 @@ require "../connect.php";
                     </div>
                     <!-- 33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 -->
 
-                    <div class="row border text-center align-middle mb-3 p-3 bg-secondary text-light" style="border-radius: 40px;">
+                    <div class="row border text-center align-middle mb-3 p-3 bg-seco text-light" style="border-radius: 40px;">
                         <div class="col-md-3">
                             <label for="photo" class="form-label">Roll no.</label>
                             <input type="text" class="form-input" value="<?php echo strtoupper($row['rollno']); ?>" readonly>
@@ -305,7 +309,7 @@ require "../connect.php";
                         </div>
                     </div>
                     <!-- 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555 -->
-                    <div class="row border text-center align-middle mb-3 p-3 bg-secondary text-light" style="border-radius: 70px;">
+                    <div class="row border text-center align-middle mb-3 p-3 bg-seco text-light" style="border-radius: 70px;">
                         <div class="col-md-3 form-group text-center">
                             <label for="photo" class="form-label">Email verify status</label>
                             <input type="text" class="form-input" value="<?php echo strtoupper($row['email_status']); ?>" readonly>

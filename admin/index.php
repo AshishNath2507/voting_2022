@@ -21,6 +21,11 @@ if (!isset($_SESSION['admin'])) {
 
     <script src="../library/jquery.min.js"></script>
 
+    <!-- Bootstrap links -->
+    <link rel="stylesheet" href="../library/css/bootstrap.min.css">
+    <!-- Bootstrap script -->
+    <script src="../library/js/bootstrap.bundle.min.js"></script>
+
     <!-- DataTable -->
     <script src="../library/DataTables/datatables.min.js"></script>
     <script src="../library/DataTables/Buttons-2.2.3/js/buttons.bootstrap5.min.js"></script>
@@ -87,7 +92,7 @@ if (!isset($_SESSION['admin'])) {
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Management:</h6>
                         <a class="collapse-item" href="./students/student.php">Students</a>
-                        <a class="collapse-item" href="./candidate/candidate.php">Candidates</a>                        
+                        <a class="collapse-item" href="./candidate/candidate.php">Candidates</a>
                     </div>
                 </div>
             </li>
@@ -127,45 +132,16 @@ if (!isset($_SESSION['admin'])) {
                 <a class="nav-link" href="./addposts.php">
                     <i class="fas fa-fw fa-plus"></i>
                     <span>Add Posts</span></a>
-            </li>           
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <!-- <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li> -->
-
-
-            <!-- Nav Item - Charts -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="charts.php">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li> -->
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.php">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+
+            <li class="nav-item">
+                <a class="nav-link" href="./result.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Result</span></a>
+            </li>
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -203,32 +179,6 @@ if (!isset($_SESSION['admin'])) {
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-
-
-                        <!-- Nav Item - Messages -->
-
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -271,9 +221,29 @@ if (!isset($_SESSION['admin'])) {
                     <!-- Page Heading -->
                     <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fas fa-delete fa-sm text-white-50"></i> Clear Voting Session</a>
                     </div> -->
+
+                    <!-- Modal -->
+                    <!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
 
                     <!-- Content Row -->
                     <div class="row">
@@ -432,10 +402,11 @@ if (!isset($_SESSION['admin'])) {
                                                     <th>Candidate's Name</th>
                                                     <th>Post Name</th>
                                                     <th>Vote Counts</th>
+                                                    <th>Voting Year</th>
                                                 </tr>
                                             </thead>
                                             <?php
-                                            $post_sql = mysqli_query($con, "SELECT * FROM posts ORDER BY p_id ASC");
+                                            $post_sql = mysqli_query($con, "SELECT * FROM posts WHERE p_current_year = '2022' ORDER BY p_id ASC");
                                             while ($postRow = mysqli_fetch_array($post_sql)) {
                                                 $voter_sql = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON ( u.id = r.user_id ) WHERE r.role = 'candidate' AND u.cand_post = '" . $postRow['p_name'] . "' ");
 
@@ -450,9 +421,10 @@ if (!isset($_SESSION['admin'])) {
 
                                                     <tbody>
                                                         <tr>
-                                                            <td> <?php echo ($voterRow['name']); ?></td>
-                                                            <td> <?php echo ($postRow['p_name']); ?></td>
+                                                            <td> <?php echo $voterRow['name']; ?></td>
+                                                            <td> <?php echo $postRow['p_name']; ?></td>
                                                             <td> <?php echo $candRow['total'] ?></td>
+                                                            <td> <?php echo $postRow['p_current_year']; ?></td>
                                                         </tr>
                                                 <?php
                                                 };

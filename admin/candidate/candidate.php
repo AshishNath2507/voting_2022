@@ -227,6 +227,11 @@ if (!isset($_SESSION['admin'])) {
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
+            <li class="nav-item">
+                <a class="nav-link" href="../result.php">
+                    <i class="fas fa-fw fa-plus"></i>
+                    <span>Result</span></a>
+            </li> 
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

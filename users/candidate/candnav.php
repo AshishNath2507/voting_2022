@@ -23,9 +23,8 @@
                             Profile
                         </a>
                         <ul class="dropdown-menu bg-info" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-
+                            <li><a class="dropdown-item" href="../userview.php">View</a></li>
+                            <li><a class="dropdown-item" href="../useredit.php">Edit</a></li>
                         </ul>
                     </li>
 
@@ -34,8 +33,7 @@
                             Candidate
                         </a>
                         <ul class="dropdown-menu bg-info" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="#">Run for election</a></li>
-                            <li><a class="dropdown-item" href="#">Login as candidate</a></li>
+                            <li><a class="dropdown-item" href="#">Apply for Candidature</a></li>
                         </ul>
                     </li>
 

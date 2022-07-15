@@ -1,10 +1,17 @@
 <?php
 session_start();
+require "../connect.php";
 if (!isset($_SESSION['username'])) {
     $_SESSION['alert_message'] = "You are Logged Out";
     header("Location: login.php");
 }
-require "../connect.php";
+    $id = $_SESSION['id'];
+    $sql = mysqli_query($con, "SELECT * FROM users WHERE id = '$id'");
+    $sqlrow = mysqli_fetch_array($sql);
+    if($sqlrow['voted'] == 'voted'){
+        $_SESSION['alert_message'] = 'You have already voted for this session';
+        header("Location: ../users/userhomepage.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +56,7 @@ require "../connect.php";
 
         #candidate_list ul {
             list-style-type: none;
+
         }
     </style>
 </head>
@@ -65,6 +73,10 @@ require "../connect.php";
 
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1">
+
+
+                        <!-- Voting Ballot -->
+                        <form method="POST" id="ballotForm" action="../backend/submit_ballot.php">
                         <?php
                         if (isset($_SESSION['alert_message'])) {
                         ?>
@@ -73,16 +85,13 @@ require "../connect.php";
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php
+                            // echo $_SESSION['alert_message'];
                             unset($_SESSION['alert_message']);
                         }
                         ?>
-
-
-                        <!-- Voting Ballot -->
-                        <form method="POST" id="ballotForm" action="../backend/submit_ballot.php">
                             <?php
                             include './slugify.php';
-                            
+
                             $candidate = '';
                             $sql = "SELECT * FROM posts ORDER BY p_id ASC";
                             $query = $con->query($sql);
@@ -119,20 +128,14 @@ require "../connect.php";
                                             
 										';
                                 }
-                                $instruct = '<p class="fs-5">Select any one candidate</p>';
+                                $instruct = '<p style="font-size: 12px;">Select any one candidate</p>';
                             ?>
 
                                 <div class="card border mb-3" style="width: auto;">
-                                    <div class="card-header bg-transparent border ">
-                                        <?php echo $row['p_name']; ?>
-                                        <p><?php echo $instruct; ?>
-                                            <span class="pull-right">
-                                                <button type="reset" class="btn btn-info btn-sm btn-flat reset" data-desc="
-                                                <?php 
-                                                slugify($row['p_name']); 
-                                                ?>
-                                                "><i class="fa fa-refresh"></i> Reset</button>
-                                            </span>
+                                    <div class="card-header bg-transparent">
+                                        <p class="bg-info p-2">
+                                            <?php echo strtoupper($row['p_name']); ?>
+                                            <?php echo $instruct; ?>
                                         </p>
                                     </div>
                                     <div class="card-body text-success">

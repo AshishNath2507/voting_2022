@@ -22,6 +22,8 @@ require "../connect.php";
     <script src="../library/popper.min.js"></script>
 
     <!-- Bootstrap links -->
+    <script src="../library/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href="../library/css/bootstrap.min.css">
     <!-- Fontawesome -->
     <link href="../library/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,8 +43,8 @@ require "../connect.php";
             font-family: anurati;
         }
 
-        body {
-            background-color: #bfe3e3;
+        .card-cust {
+            background-color: #dbe5e5;
         }
 
         .btn-cust {
@@ -60,9 +62,7 @@ require "../connect.php";
             transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         }
 
-
         .p-cust {
-
             background-color: #002f75;
             color: white;
         }
@@ -88,25 +88,26 @@ require "../connect.php";
     $pq = mysqli_query($con, "SELECT * FROM posts");
     while ($row1 = mysqli_fetch_array($pq)) {
     ?>
-        <div class="container-lg mx-auto my-2 mb-4">
-            <p class="fs-3 p-cust p-2 rounded">
+        <div class="container-lg mx-auto my-2 mb-4 shadow rounded">
+            <p class="fs-5 p-cust p-1 rounded">
                 <?php echo strtoupper($row1['p_name']); ?>
             </p>
 
-            <div class="d-grid p-2">
+            <div class="d-grid p-2 ">
                 <div class="row">
                     <?php
                     $uq = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON (u.id = r.user_id) WHERE r.role = 'candidate' AND u.cand_approval = 'approved' AND isdel = '0' AND u.cand_post = '" . $row1['p_name'] . "'");
                     while ($row = mysqli_fetch_array($uq)) {
                        
-                        $ob = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM objectives WHERE cand_id = '".$row['id']."'"));
+                        $ob = mysqli_fetch_array($qqq = mysqli_query($con, "SELECT * FROM objectives WHERE cand_id = '".$row['id']."'"));
+                        $count = mysqli_num_rows($qqq);
                         // echo json_decode($ob['objs']);
 
 
                     ?>
-                        <div class="col-4" style="max-height: 300px;">
-                            <div class="card" style="width: 18rem; height: 20rem;">
-                                <div class="bg-image hover-overlay ripple text-center" data-mdb-ripple-color="light">
+                        <div class="col-3 " style="max-height: 250px;">
+                            <div class="card card-cust" style="width: 15rem; height: 15rem;">
+                                <div class="bg-image hover-overlay ripple text-center" style="width: 15rem; height: 6rem;" data-mdb-ripple-color="light">
                                     <img src="<?php echo '../uploads/' . $row['photo']; ?>" class="img-fluid m-2" style="width: 40%;" alt="DP" />
                                     <img src="<?php echo '../uploads/' . $row['insignia']; ?>" class="img-fluid m-2" style="width: 40%; height: 80%;" alt="insignia" />
                                     <a href="#!">
@@ -118,10 +119,10 @@ require "../connect.php";
                                     <p class="mb-1">Branch : <?php echo $row['branch']; ?></p>
                                     <button class="btn btn-secondary btn-cust objectives" data-bs-trigger="focus" title="<?php echo strtoupper($row['name'] . ' objectives'); ?>" data-bs-content="
                                     <?php 
-                                    if($ob['objs'] == null) {
-                                        echo "NO OBJECTIVES ADDED";
-                                    }else{
+                                    if( $count > 0 ) {
                                         echo json_decode($ob['objs']); 
+                                    }else{
+                                        echo "NO OBJECTIVES ADDED";
                                     }
                                     ?>
                                     ">
@@ -148,7 +149,8 @@ require "../connect.php";
     ?>
 
     <!-- Bootstrap script -->
-    <script src="../library/js/bootstrap.bundle.min.js"></script>
+
+    
 
 </body>
 

@@ -6,6 +6,8 @@ if (!isset($_SESSION['username'])) {
     header("Location: login.php");
 }
 require "../connect.php";
+
+
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +101,18 @@ require "../connect.php";
                             <!-- <p class="text-muted mb-1">Full Stack Developer</p> -->
                             <p class="text-muted mb-4"><?php echo strtoupper($row['branch']); ?></p>
 
-                            <button class="btn btn-danger bobtn" data-bs-toggle="modal" data-bs-target="#BackOut" value="<?php echo $row["id"]; ?>">Back-out</button>
+                            <?php
+                            $withdraw_query = mysqli_query($con, "SELECT * FROM users AS u INNER JOIN roles AS r ON ( u.id = r.user_id ) WHERE u.id = '$id' AND r.role = 'candidate'");
+                            $wrow = mysqli_fetch_array($withdraw_query);
+                            $count_with = mysqli_num_rows($withdraw_query);
+
+                            if ($count_with > 0) {
+                            ?>
+                                <button class="btn btn-danger bobtn" data-bs-toggle="modal" data-bs-target="#BackOut" value="<?php echo $row["id"]; ?>">Withdraw</button>
+                            <?php
+                            }
+                            ?>
+
 
                             <p class="text-muted mb-4" title="A/c Creation Time"><?php echo $row['created']; ?></p>
                         </div>
@@ -249,8 +262,16 @@ require "../connect.php";
                                 <div class="card-body">
                                     <p class="mb-4"><span class="text-primary font-italic me-1">Images</span> User's Photo
                                     </p>
-                                    <img src="<?php echo '../uploads/' . $row["id_proof"]; ?>" alt="avatar" class="img-fluid" style="width: 150px;">
-                                    <img title="candidate insignia" src="<?php echo '../uploads/' . $row["insignia"]; ?>" class="img-fluid" style="width: 150px;">
+                                    <img title="ID PROOF IMAGE" src="<?php echo '../uploads/' . $row["id_proof"]; ?>" alt="avatar" class="img-fluid" style="width: 150px;">
+                                   
+                                    <?php
+                                    if ($count_with > 0) {
+                                    ?>
+                                        <img title="CANDIDATE INSIGNIA" src="<?php echo '../uploads/' . $row["insignia"]; ?>" class="img-fluid" style="width: 150px;">
+                                    <?php
+                                    }
+                                    ?>
+                                    
                                 </div>
                             </div>
                         </div>

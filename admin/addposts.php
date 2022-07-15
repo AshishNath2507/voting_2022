@@ -18,8 +18,9 @@ if (!isset($_SESSION['admin'])) {
     <meta name="author" content="">
 
     <title>Admin - Add Posts</title>
-    
+
     <script src="../library/jquery.min.js"></script>
+    <script src="../backend/validate.js"></script>
 
     <!-- DataTable -->
     <script src="../library/DataTables/datatables.min.js"></script>
@@ -63,6 +64,9 @@ if (!isset($_SESSION['admin'])) {
             -webkit-font-smoothing: antialiased;
             color: white;
             border: 0;
+        }
+        .error-form{
+            color: #c00909;
         }
     </style>
 
@@ -558,14 +562,14 @@ if (!isset($_SESSION['admin'])) {
                                     ?>
                                     <form action="../backend/addposts1.php" method="post">
                                         <div class="mb-1 d-flex">
-
-                                            <label for="addpost" class="form-label p-25 fs-5 mx-2" style="width: 6rem">Add Post</label>
-
-                                            <input type="text" name="addpost" id="addpost" class="form-control" style="width: 65%" required />
-
-                                            <button class="btn btn-primary bg-transparent text-primary mx-4" type="submit" name="postSubmit">Add</button>
-
+                                            
+                                            <label for="name" class="form-label p-25 fs-5 mx-2" style="width: 6rem">Add Post</label>
+                                            
+                                            <input type="text" name="addpost" id="name" class="form-control" style="width: 65%" required />
+                                            <button class="btn btn-primary bg-transparent text-primary mx-4" type="submit" name="postSubmit" id="addPost">Add</button>
+                                            
                                         </div>
+                                        <span class="error-form text-shadow" id="name_error_message"></span>
                                     </form>
                                 </div>
                             </div>
@@ -585,6 +589,7 @@ if (!isset($_SESSION['admin'])) {
                                             <tr>
                                                 <th>Slno</th>
                                                 <th>Name</th>
+                                                <th>Year</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -598,6 +603,7 @@ if (!isset($_SESSION['admin'])) {
                                                 <tr>
                                                     <th class="post_id"> <?php echo $row['p_id']; ?> </th>
                                                     <th> <?php echo $row['p_name']; ?> </th>
+                                                    <th> <?php echo $row['p_current_year']; ?> </th>
                                                     <th>
 
                                                         <button class="btn btn-danger deletebtn delete rounded-circle mx-1" value="<?php echo $row["p_id"]; ?>"></button>
@@ -605,6 +611,8 @@ if (!isset($_SESSION['admin'])) {
                                                 </tr>
                                             <?php
                                             };
+
+
                                             ?>
 
                                         </tbody>
@@ -684,7 +692,8 @@ if (!isset($_SESSION['admin'])) {
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Ashish Nath - <?php $year = date('Y');
+                                                                echo $year; ?></span>
                     </div>
                 </div>
             </footer>
@@ -735,21 +744,21 @@ if (!isset($_SESSION['admin'])) {
             });
         });
 
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('.editbtn').on('click', function() {
                 $('#editModal').modal('show');
-                    $tr = $(this).closest('tr');
-                    var data = $tr.children('td').map(function() {
-                        return $(this).text();
-                    }).get();
+                $tr = $(this).closest('tr');
+                var data = $tr.children('td').map(function() {
+                    return $(this).text();
+                }).get();
 
-                    console.log(data);
-                    $('#updateid').val(data[0]);
-                    $('#updatename').val(data[1]);
+                console.log(data);
+                $('#updateid').val(data[0]);
+                $('#updatename').val(data[1]);
             });
         });
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             getdata();
             $('.editbtn').onclick(function(e) {
                 e.preventDefault();
@@ -772,7 +781,6 @@ if (!isset($_SESSION['admin'])) {
                 })
             });
         });
-
     </script>
 
     <script src="../library/js/bootstrap.bundle.min.js"></script>
